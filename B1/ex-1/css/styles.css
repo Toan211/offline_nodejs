@@ -1,0 +1,45 @@
+div.header{
+    margin: 25px 5px;
+    border: 2px solid #b1154a;
+    text-align: center;
+}
+
+div.TaskBody{
+    margin: 30px 0px;
+    border: 3px solid #b1154a;
+    
+    height: 500px;
+}
+
+table, th, td {
+    border: 1px solid black;
+  }
+
+div.TaskProgress{
+    text-align: right;
+    margin-right: 50px;
+    margin-bottom: 30px;
+    margin-top: -30px;
+    
+    
+}
+p#F-P {
+     
+}
+
+div.AddTable{
+    
+
+    
+}
+
+fieldset.TaskTable {
+    margin: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px;    
+    border-radius: 10px;
+}
+
+legend {
+    padding: 2px;    
+}

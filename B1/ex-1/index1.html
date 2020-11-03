@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Starter</title>
+
+  </head>
+
+  
+  <body>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <div class="container">
+        <div class="header">
+            <div id="Famous">
+                <!-- famous word  -->
+                <p><span id="word"> Trong cuộc sống, giai đoạn khó khăn nhất không phải là không ai hiểu bạn, mà là… bạn không hiểu chính mình.</span>
+            </div>
+        </div>
+
+        <div class="TaskBody"> 
+
+            <h1 class="TaskList">Task</h1>
+            
+            <div class="Task">
+                <div class="TaskProgress">
+                    <p id="F-P">Finish: <span id="Finish"> 0 </span> Progress: <span id="Progress"> 0 </span> </p>
+
+                </div>
+
+                <div class="TaskTable">
+                    <table id="_TableT" style="width:100%">
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Deadline</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>My first HTML</td>
+                          <td>$53</td>
+                          <td>Finish</td>
+                          <td> edit / delete</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>My first CSS</td>
+                          <td>$47</td>
+                          <td>Progress</td>
+                          <td> edit / delete</td>
+                        </tr>
+                        
+                        <tr id="_Task"> 
+                            
+                        </tr>
+                    
+                    </table>
+
+                </div>
+
+                <div class="TaskAddBtn">
+
+                    <div class="Add" style="margin-top: 30px;">
+                        <button onclick="AddTask()" type="button" class="btn btn-success">Add_Task</button>
+                        <div id="AddDIV">
+                            <form>
+                                <fieldset class="TaskTable">
+                                    <legend>Personal:</legend>
+                                    
+                                    <label for="TName">Task name:</label>
+                                    <input type="text" id="TName" name="TName">
+
+                                    <input type="date" id="DeadLine" name="DeadLine">
+                                    
+                                    <label for="cars">Choose progress:</label>
+                                    <select name="TaskCBox" id="TaskCBox">
+                                        <option value="Progress"> Progress </option>
+                                        <option value="Finish"> Finish </option>
+                                    </select>
+                                    <br/>
+
+                                    
+                                    <button onclick="Add()" type="button" class="btn btn-success"> Submit </button>
+                                    <button onclick="CancelTask()" type="button" class="btn btn-danger"> cancel </button>
+                                   </fieldset>
+                               </form>
+
+                            <div class="AddTable">
+                                
+                                
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    
+                </div>
+                
+
+
+            </div>
+
+            
+        </div>
+
+    </div>
+
+
+    <script src="js/js.js"></script>
+  </body>
+</html>
+
