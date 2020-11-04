@@ -1,4 +1,7 @@
 const http = require('http'); // nodejs require many module, wanna more module? paste their name in this field
+                    //module dc node js xây dựng sẵn
+
+const moduleOne = require('./libs');
 
 const hostname = '127.0.0.1'; 
 const port = 5500;              //nếu thay đổi thứ gì đó trong đây (port, content,...), 
@@ -10,6 +13,8 @@ const server = http.createServer((req, res) => {  //require // respond (kết qu
   res.end('Hello lmao');           //trả về g trị hello world
 });
 
-server.listen(port, hostname, () => {       //server lắng nghe port là 3000, hostname
+server.listen(port, hostname, () => {       //server lắng nghe port là 3000, hostname 
   console.log(`Server running at http://${hostname}:${port}/`);   //in ra giá trị server đang lắng nghe
+
+  moduleOne.show()  //gọi đến các function trong file libs.js
 });
