@@ -10,7 +10,7 @@ http.createServer((req, res) => {
 										 	//nếu cho '<h1> hello <h1>' 
 												//trong khi đang xài header text/plain thì nó chỉ in ra: '<h1> hello <h1>'
 													// chứ ko phải thẻ html h1
-													
+	//bài sau sẽ hướng dẫn cách trả về nguyên 1 link html luôn
 }).listen(moduleConfig.port);
 
 
