@@ -5,14 +5,14 @@ const url = require('url');     //lấy url
 
 const configs = require('./myModule/config'); 
 
-//!cách 3 
+
 function onRequest(req, res)
 {
   //*console.log(req.url); // in url ra console//terminal
 
   //*console.log(url.parse(''));   //truyền vào đường dẫn //in ra nhiều thông in hơn, tt chính xác hơn
 
-  const path = url.parse(req.url).pathname; 
+  const path = url.parse(req.url).pathname;  // lấy path của cái url của mh
   console.log(path);
  
   if(path == '/about')
