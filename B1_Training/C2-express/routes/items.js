@@ -4,15 +4,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/list', function(req, res, next) {
-  res.send('list video');
+  res.render('items/list', { title: 'ItemPage list' });
 });
 
 router.get('/add', function(req, res, next) {
-  res.send('add video');
-});
-
-router.get('/edit', function(req, res, next) {
-  res.send('edit video');
+  res.render('items/add', { title: 'Item AddPage' });
 });
 
 module.exports = router;
