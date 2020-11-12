@@ -17,6 +17,9 @@ var parseStatus = status => {
 
 const LIST_TASK_KEY = "LIST_TASK";
 
+var count = 0;
+var globalId = 0;
+
 var saveDataToStorage = (key, data) => {
     localStorage.setItem(LIST_TASK_KEY, JSON.stringify(data));
 }
