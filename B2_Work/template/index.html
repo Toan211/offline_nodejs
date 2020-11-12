@@ -62,7 +62,7 @@
 
 			<!-- ADD : START -->
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-				<button type="button" class="btn btn-info btn-block">Add Task</button>
+				<button onclick="addTask()" type="button" class="btn btn-info btn-block">Add Task</button>
 			</div>
 			<!-- ADD : END -->
 
@@ -70,23 +70,23 @@
 		<!-- CONTROL (SEARCH + SORT + ADD) : END -->
 		
 		<!-- FORM : START -->
-		<div class="row">
+		<div class="row" id="formControl" style="display: block;">
 			<div class="col-md-offset-7 col-md-5">
 				<form action="" method="POST" class="form-inline"  >
 					<div class="form-group">
 						<label class="sr-only" for="">label</label>
-						<input type="text" class="form-control" placeholder="Task Name" ref="task_name" />
+						<input type="text" class="form-control" placeholder="Task Name" ref="task_name" id="taskName" />
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="">label</label>
 						<select name="ds" id="inputDs" class="form-control" required="required" ref="task_level">
-							<opti value="0" >Small</option>
+							<option value="0">Small</option>
 							<option value="1">Medium</option>
 							<option value="2">High</option>
 						</select>
 					</div>
 
-					<button type="button" class="btn btn-primary">Submit</button>
+					<button type="button"  onclick="submitTask()" class="btn btn-primary" >Submit</button>
 					<button type="button" class="btn btn-default">Cancel</button>
 				</form>
 			</div>
@@ -97,7 +97,7 @@
 
 		<div class="panel panel-success" >
 			<div class="panel-heading">List Task</div>
-			<table class="table table-hover ">
+			<table class="table table-hover" id= "task_table">
 				<thead>
 					<tr>
 						<th style="width: 10%" class="text-center">#</th>
@@ -107,7 +107,8 @@
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody id="table_body">
+					<!--insert ID, Task, Level, action (edit, delete)-->
 					<tr>
 						<td class="text-center">1</td>
 						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
@@ -154,5 +155,7 @@
 	<script src="js/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/task.js"></script>
+	<script src="js/util.js" ></script>
 </body>
 </html>
