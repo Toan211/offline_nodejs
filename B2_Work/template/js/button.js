@@ -1,86 +1,67 @@
 //toggle collapse add form
 function addTask() {
-    var x = getEleID("formControl");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-    resetForm();
+  var x = getEleID("formControl");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
   }
-
-  //submit task button
-var submitTask = () => {
-
-    let taskName = getEleID("taskName").value;
-    let taskLevel = getEleID("inputDs").value;
-    
-    let obj = {
-      name: taskName,
-      level: taskLevel
-  }
-  listTask.push(obj);
-
-  // Save task
-  saveListTask();
-
-  let id = listTask.length;
-  onInsertTask(id, taskName, taskLevel);
-
   resetForm();
 }
 
+// Edit Task
+var onEditTask = (id) => {
+  count++;
+  let { name, level } = listTask[id - 1];
 
+  let taskID = getEleID("taskId");
+  let e_taskName = getEleID("edit__taskName");
+  let e_taskDeadLine = getEleID("edit__taskLevel");
 
+  taskID.value = id;
+  e_taskName.value = name;
+  e_taskDeadLine.value = level;
+
+  globalId = id;
+
+  console.log(id, name, level);
+
+  getEleID("taskName").value = name;
+  getEleID("inputDs").value = level;
+};
+
+//submit task button
 var onSubmitTask = () => {
-  
-    if (count >= 1)
-    {
-        console.log(globalId);
-        let edTaskName = getEleID("taskName").value;
-        let edTaskLevel = getEleID("inputDs").value;
+  if (count >= 1) {
+    console.log(globalId);
+    let edTaskName = getEleID("taskName").value;
+    let edTaskLevel = getEleID("inputDs").value;
 
-        let obj = {
-            name: edTaskName,
-            level: edTaskLevel
-        }
+    let obj = {
+      name: edTaskName,
+      level: edTaskLevel,
+    };
 
-        listTask.splice(globalId - 1, 1, obj);
-        saveListTask();
+    listTask.splice(globalId - 1, 1, obj);
+    saveListTask();
 
-        let table = getEleID("tableBody");
-    table.innerHTML +=
-        `<tr id="tableId">
-            <td id="taskId">${globalId}   </td>
-            <td id = "edit__taskName">${edTaskName}</td>
-            <td id = "edit__taskLevel"><span ${edTaskLevel == 0 ? `class="Small"` : (edTaskLevel == 1 ? `class="Medium"` : `class"High" `)}>${parseStatus(edTaskLevel)}</span></td>
-            <td>
-                <button id="editButton" type="button" onclick="onEditTask(${globalId})" class="btn btn-info mr-1">Edit</button>
-                <button type="button" class="btn btn-danger" onclick="onDeleteTask(${globalId})">Delete</button>
-            </td>
-        </tr>`
+    onInsertTask(globalId, edTaskName, edTaskLevel);
 
-        resetForm();
-        // Save task
-        saveListTask();
-        // Render task
-        renderListTask();
-    }
-    else if (count == 0)
-    {
-        submitTask();
-    }
-    
-}
-
+    resetForm();
+    // Save task
+    saveListTask();
+    // Render task
+    renderListTask();
+  } else if (count == 0) {
+    submitTask();
+  }
+};
 
 var onDeleteTask = (id) => {
-    
-        listTask.splice(id - 1, 1);
-        
-        // Save task
-        saveListTask();
-        // Render task
-        renderListTask();
-    
-}
+  listTask.splice(id - 1, 1);
+
+  // Save task
+  saveListTask();
+  // Render task
+  renderListTask();
+};
