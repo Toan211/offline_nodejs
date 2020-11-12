@@ -107,15 +107,15 @@
 					</tr>
 				</thead>
 
-				<tbody id="table_body">
+				<tbody id="tableBody">
 					<!--insert ID, Task, Level, action (edit, delete)-->
 					<tr>
 						<td class="text-center">1</td>
 						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
 						<td class="text-center"><span class="label label-danger">High</span></td>
 						<td>
-							<button type="button" class="btn btn-warning">Edit</button>
-							<button type="button" class="btn btn-danger">Delete</button>
+							<button type="button" onclick="onEditTask()" class="btn btn-info mr-1" data-toggle="modal" data-target="#modalEdit">Edit</button>
+							<button type="button" class="btn btn-danger" onclick="onDeleteTask()">Delete</button>
 						</td>
 					</tr>
 					<tr>
@@ -155,7 +155,9 @@
 	<script src="js/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/task.js"></script>
 	<script src="js/util.js" ></script>
+	<script src="js/task.js"></script>
+	<script src="js/button.js" ></script>
+	<script src="js/main.js" ></script>
 </body>
 </html>

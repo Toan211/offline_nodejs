@@ -5,7 +5,7 @@ var saveListTask = () => {
   saveDataToStorage(LIST_TASK_KEY, listTask);
 }
 
-// Get list task from storage
+// Get/load list task from storage
 var getListTask = () => {
   let listTaskStore = getDataFromStorage(LIST_TASK_KEY);
   if (listTaskStore == null) {
@@ -14,27 +14,38 @@ var getListTask = () => {
   return listTaskStore;
 }
 
-//toggle collapse add form
-function addTask() {
-    var x = getEleID("formControl");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
+// Show task in table upon open window (data from local storage)
+var showListTask = () => {
+  listTask = getListTask();
+  if (listTask.length > 0) {
+      let id = 0;
+      for (let task of listTask) {
+          let { name, level } = task;
+          id++;
+          onInsertTask(id, name, level);
+      }
   }
+}
 
-  var resetForm = () => {
+// Render list task 
+var renderListTask = () => {
+  let table = getEleID("tableBody");
+  //table.innerHTML = "";
+  showListTask();
+}
+
+
+var resetForm = () => {
     let taskName = getEleID('taskName');
     taskName.value = "";
     let taskLevel = getEleID("inputDs");
-    taskLevel.value = "";
+    taskLevel.value = 0;
   }
 
   // Insert new task to table
 var onInsertTask = (id, name, level) => {
     
-    let table = getEleID("table_body");
+    let table = getEleID("tableBody");
     table.innerHTML +=
         `<tr>
             <td>${id}</td>
@@ -47,23 +58,3 @@ var onInsertTask = (id, name, level) => {
         </tr>`
 }
 
-//add task
-var submitTask = () => {
-
-    let taskName = getEleID("taskName").value;
-    let taskLevel = getEleID("inputDs").value;
-    
-    let obj = {
-      name: taskName,
-      level: taskLevel
-     
-  }
-  listTask.push(obj);
-
-  // Save task
-  saveListTask();
-
-  let id = listTask.length;
-  onInsertTask(id, taskName, taskLevel);
-
-}
