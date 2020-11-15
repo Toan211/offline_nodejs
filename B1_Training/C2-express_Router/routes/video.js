@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/list', function(req, res, next) {
+router.get('/list', function(req, res, next) {  //* qua /list thì mở tập tin video-list
   res.send('list video');
 });
 
