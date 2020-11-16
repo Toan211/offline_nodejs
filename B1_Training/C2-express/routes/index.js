@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 //! 1C2-2-2View
 router.get('/dashboard', function(req, res, next) {
-  res.render('pages/dashboard/index', { title: 'Dashboard page' });  //*index is in view folder
+  res.render('pages/dashboard/index', { pageTitle: 'Dashboard page' });  //*index is in view folder
 });
 
 module.exports = router;

@@ -4,11 +4,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/list', function(req, res, next) {
-  res.render('pages/items/list', { title: 'ItemPage list' });
+  res.render('pages/items/list', { pageTitle: 'ItemPage list' });
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('pages/items/add', { title: 'Item AddPage' });
+  res.render('pages/items/add', { pageTitle: 'Item AddPage' });
 });
 
 module.exports = router;
