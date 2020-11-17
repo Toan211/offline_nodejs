@@ -64,4 +64,8 @@ var onDeleteTask = (id) => {
   saveListTask();
   // Render task
   renderListTask();
+  resetForm();
 };
+
+
+

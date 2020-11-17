@@ -1,15 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Bootstrap 101 Template</title>
-
-	<link href="css/style.css" rel="stylesheet" />
-	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+	
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<!--
 		Notice the use of %PUBLIC_URL% in the tags above.
@@ -21,12 +20,12 @@
 	-->
 	<title>Training React App</title>
 </head>
-
 <body>
 	<div class="container">
+
 		<!-- TITLE : START -->
 		<div class="page-header">
-			<h1>Project 01 - ToDo List <small>NodeJS</small></h1>
+		  <h1>Project 01 - ToDo List <small>NodeJS</small></h1>
 		</div>
 		<!-- TITLE : END -->
 
@@ -35,9 +34,9 @@
 			<!-- SEARCH : START -->
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<div class="input-group">
-					<input type="text" id="searchInput" class="form-control" ref="search" placeholder="Search for..." />
+					<input type="text" class="form-control" ref="search" placeholder="Search for..." />
 					<span class="input-group-btn">
-						<button onclick="onSearchInput()" class="btn btn-info" type="button">Go!</button>
+						<button  class="btn btn-info" type="button">Go!</button>
 					</span>
 				</div>
 			</div>
@@ -46,8 +45,7 @@
 			<!-- SORT : START -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						Sort by <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -64,37 +62,32 @@
 
 			<!-- ADD : START -->
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-				<button onclick="addTask()" type="button" class="btn btn-info btn-block">
-					Add Task
-				</button>
+				<button type="button" class="btn btn-info btn-block">Add Task</button>
 			</div>
 			<!-- ADD : END -->
+
 		</div>
 		<!-- CONTROL (SEARCH + SORT + ADD) : END -->
-
+		
 		<!-- FORM : START -->
-		<div class="row" id="formControl" style="display: block">
+		<div class="row">
 			<div class="col-md-offset-7 col-md-5">
-				<form action="" method="POST" class="form-inline">
+				<form action="" method="POST" class="form-inline"  >
 					<div class="form-group">
 						<label class="sr-only" for="">label</label>
-						<input type="text" class="form-control" placeholder="Task Name" ref="task_name" id="taskName" />
+						<input type="text" class="form-control" placeholder="Task Name" ref="task_name" />
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="">label</label>
 						<select name="ds" id="inputDs" class="form-control" required="required" ref="task_level">
-							<option value="0">Small</option>
+							<opti value="0" >Small</option>
 							<option value="1">Medium</option>
 							<option value="2">High</option>
 						</select>
 					</div>
 
-					<button type="button" onclick="onSubmitTask()" class="btn btn-primary">
-						Submit
-					</button>
-					<button type="button" onclick="resetForm()" class="btn btn-default">
-						Cancel
-					</button>
+					<button type="button" class="btn btn-primary">Submit</button>
+					<button type="button" class="btn btn-default">Cancel</button>
 				</form>
 			</div>
 		</div>
@@ -102,9 +95,9 @@
 
 		<!-- LIST : START -->
 
-		<div class="panel panel-success">
+		<div class="panel panel-success" >
 			<div class="panel-heading">List Task</div>
-			<table class="table table-hover" id="task_table">
+			<table class="table table-hover ">
 				<thead>
 					<tr>
 						<th style="width: 10%" class="text-center">#</th>
@@ -114,13 +107,41 @@
 					</tr>
 				</thead>
 
-				<tbody id="tableBody">
-					<!--insert ID, Task, Level, action (edit, delete)-->
+				<tbody>
+					<tr>
+						<td class="text-center">1</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+						<td class="text-center"><span class="label label-danger">High</span></td>
+						<td>
+							<button type="button" class="btn btn-warning">Edit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center">2</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+						<td class="text-center"><span class="label label-default">Small</span></td>
+						<td>
+							<button type="button" class="btn btn-warning">Edit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center">3</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+						<td class="text-center"><span class="label label-info">Medium</span></td>
+						<td>
+							<button type="button" class="btn btn-warning">Edit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</td>
+					</tr>
 				</tbody>
+
 			</table>
 		</div>
 	</div>
 
+	
 	<!--
 		This HTML file is a template.
 		If you open it directly in the browser, you will see an empty page.
@@ -133,12 +154,5 @@
 	<script src="js/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/util.js"></script>
-	
-	<script src="js/task.js"></script>
-	<script src="js/temp.js"></script>
-	<script src="js/button.js"></script>
-	<script src="js/main.js"></script>
 </body>
-
 </html>
