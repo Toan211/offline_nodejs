@@ -10,8 +10,8 @@ var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts');
 
 //package user make
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
+
 
 var app = express();
 
@@ -28,10 +28,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);     
-//!1C2-2-Router //! 1C2-2-2View
-app.use('/items', require('./routes/items'));
+app.use('/admin/', require('./routes/index'));   
+app.use('/admin/dashboard', require('./routes/dashboard'));
+app.use('/admin/items', require('./routes/items'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

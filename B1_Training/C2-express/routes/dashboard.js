@@ -2,11 +2,8 @@ var express = require('express');   //*express is a framework, provide us many u
 var router = express.Router();
 
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { pageTitle: 'Express' });  //*index is in view folder
+  res.render('pages/dashboard/index', { pageTitle: 'Dashboard page' });  //*index is in view folder
 });
-
-
 
 module.exports = router;
