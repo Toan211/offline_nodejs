@@ -28,9 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/', require('./routes/backend/home'));   
-app.use('/admin/dashboard', require('./routes/backend/dashboard'));
-app.use('/admin/items', require('./routes/backend/items'));
+app.use('/admin', require('./routes/backend/index'));   
+app.use('/', require('./routes/frontend/index'));   
 
 
 // catch 404 and forward to error handler
