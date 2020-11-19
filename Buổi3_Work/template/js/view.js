@@ -45,3 +45,46 @@ showItems = (items, element) => {
     }
     element.innerHTML = xhtml;
 }
+
+
+showNameSort = (name, col) => {
+    if(col == 1) {
+        if(name == 'asc' ) {
+        areaNameSort.innerHTML = "NAME - ASC";
+        } else if(name == 'desc') {
+            areaNameSort.innerHTML = "NAME - DESC";
+        }
+    } else if(col == 2) {
+        if(name == 'asc' ) {
+            areaNameSort.innerHTML = "LEVEL - ASC";
+        } else if(name == 'desc') {
+            areaNameSort.innerHTML = "LEVEL - DESC";
+        }
+    }
+}
+
+sortList = (nameSort, col) => {
+    let items = listItems();
+
+    if(col === 1) {
+        items.sort(function (a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }        
+              return 0;
+        });
+    } else if(col === 2) {
+        items.sort(function (a, b) {
+            return a.level - b.level;
+        });
+    }
+    
+    if(nameSort === "asc") {
+        return items
+    } else if(nameSort ==="desc") {
+        return items.reverse();
+    }   
+}

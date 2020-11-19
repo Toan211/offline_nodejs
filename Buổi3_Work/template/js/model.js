@@ -11,10 +11,19 @@ loadStorage = () => {
 }
 
 //cho các items từ local store vào mảng, r return nó ra
-listItems = () => {
+listItems = ( key = null) => {
     let items = loadStorage();
     if(items == null) {
         items = [];
+    }
+    if (key !==null)
+    {
+        if(items !== null)
+        {
+
+            items = items.filter((item)=> item.name.indexOf(key)>-1);
+            
+        }
     }
     return items;
 }

@@ -65,3 +65,27 @@ funcEditTask = (id) => {
     areaInputID.value = item.id;
 }
 
+
+funcSort = (sortName, col) => {
+    showNameSort(sortName, col);
+    let items = sortList(sortName, col);
+    saveStorage(items);
+    showItems(items, areaListTask);
+
+}
+
+
+
+funcSearch = () => {
+   let str = areaInputSearch;
+   let items = listItems(str.value);
+   showItems(items, areaListTask);
+
+}
+funcClearSearch = ()=>
+{   
+    areaInputSearch.value = null;
+    let str =  areaInputSearch.value;
+    let items = listItems(str.value);
+    showItems(items, areaListTask);
+}
