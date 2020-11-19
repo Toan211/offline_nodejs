@@ -80,3 +80,9 @@ var checkName = (name) => {
     }
     return false;
 }
+
+highlightName = (name , key) => {
+    let highlight = '<span class="high-light">' + key + '</span>';
+    let newName = name.replace(new RegExp(key), highlight);
+    return newName;
+}

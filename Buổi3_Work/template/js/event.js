@@ -82,6 +82,7 @@ funcSearch = () => {
    showItems(items, areaListTask);
 
 }
+
 funcClearSearch = ()=>
 {   
     areaInputSearch.value = null;

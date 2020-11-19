@@ -11,3 +11,7 @@ span.label-medium {
     margin: 0px 8px;
     font-size: 16px;
 }
+
+.high-light {
+    background-color: yellow;
+}

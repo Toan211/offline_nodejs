@@ -27,14 +27,18 @@ toggleElement = (ele, typeDisplay) => {
 showItems = (items, element) => {
     areaListTask.innerHTML = "";
     let xhtml = ``;
-    let numberRow = items.length;
     var indexRow = 0;
-    if(numberRow == 0) xhtml = "";
+    let searchValue = areaInputSearch.value;
+    if(items.length == 0) xhtml = "";
     else {
         items.forEach(item => {
+            let itemName = item.name;
+            if(searchValue !== "") {
+                itemName = highlightName(item.name, searchValue);
+            }
             xhtml += `<tr>
                 <td class="text-center">` + ++indexRow + `</td>
-                <td>` + item.name + `</td>
+                <td>` + itemName + `</td>
                 <td class="text-center">` + showItemLevel(item.level) + `</td>
                 <td>
                     <button onclick="funcEditTask('` + item.id + `')" type="button" class="btn btn-warning">Edit</button>
