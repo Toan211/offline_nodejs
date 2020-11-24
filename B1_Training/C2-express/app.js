@@ -28,6 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/admin', require('./routes/backend/index'));   
 app.use('/', require('./routes/frontend/index'));   
 
@@ -45,7 +47,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {pageTitle : 'error page'});
 });
 
 module.exports = app;
