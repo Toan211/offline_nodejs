@@ -17,13 +17,13 @@
             else link += '?page=';
 
             if(currentPage > 1){
-                xhtmlStart = `<li><a href="${link}1">Start</a></li>`;
-                xhtmlPrevious = `<li><a href="${link}${currentPage-1}">Previous</a></li>`;
+                xhtmlStart = `<li><a class="page-link" href="${link}1">Start</a></li>`;
+                xhtmlPrevious = `<li><a class="page-link" href="${link}${currentPage-1}">Previous</a></li>`;
             }
 
             if(currentPage < totalPages){
-                xhtmlEnd = `<li><a href="${link}${totalPages}">End</a></li>`;
-                xhtmlNext = `<li><a href="${link}${currentPage+1}">Next</a></li>`;
+                xhtmlEnd = `<li><a class="page-link" href="${link}${totalPages}">End</a></li>`;
+                xhtmlNext = `<li><a class="page-link" href="${link}${currentPage+1}">Next</a></li>`;
             }
 
             let middle = Math.ceil(pageRanges/2);
@@ -42,9 +42,9 @@
 
             for(let i = min; i <= max; i++){
                 if(i == currentPage) {
-                    xhtmlPages += `<li class="active"><a>${i}</a></li>`;
+                    xhtmlPages += `<li class="page-link" class="active"><a>${i}</a></li>`;
                 } else {
-                    xhtmlPages += `<li><a href="${link}${i}">${i}</a></li>`;
+                    xhtmlPages += `<li><a class="page-link" href="${link}${i}">${i}</a></li>`;
                 }
             }
 
@@ -52,18 +52,18 @@
         }
 
         return `
-            <div class="panel panel-info" id="pagination">
-                <div class="panel-heading">
+            <div class="card card-info card-outline" id="pagination">
+                <div class="card-header">
                     Pagination
-                    <span class="label label-warning">Total pages: ${totalPages}</span>
-                    <span class="label label-danger">Total entries: ${totalItems}</span>
+                    <span class="label label-warning" style="float: right; margin-right: 10px" >Total pages: ${totalPages}</span>
+                    <span class="label label-danger" style="float: right; margin-right: 10px">Total entries: ${totalItems}</span>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="infor-pagination">
                         <p>Number of entries on the page:<span>${totalItemsPerPage}</span></p>
                         <p>Showing<span> ${from} </span> to<span> ${to}</span> of<span> ${totalItems}</span> entries</p>
                     </div>
-                    <div class="ad-pagination">
+                    <div class="pagination pagination-sm m-0 float-right">
                         ${xhtmlPagination}
                     </div>
                 </div>

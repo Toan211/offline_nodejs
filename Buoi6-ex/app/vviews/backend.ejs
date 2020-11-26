@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <% include ./elements/header %>
+    <% include ./elements/head.ejs %>
 </head>
 
-<body>
-    <div id="wrapper">
-        <% include ./elements/navbar %>
-        
-        <div id="page-wrapper">
-            <% include ./elements/title-page %>
+<body class="hold-transition sidebar-mini layout-fixed text-sm">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <% include ./elements/navbar.ejs %>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <% include ./elements/sidebar.ejs %>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="min-height: 374.047px;">
+        <% include ./elements/title-page %>
             <%- body %>
         </div>
+
+        <!-- /.content-wrapper -->
+        <% include ./elements/footer.ejs %>
     </div>
-    <% include ./elements/scripts %>
+    <!-- ./wrapper -->
+
+    <!-- script -->
+    <% include ./elements/script.ejs %>
 </body>
 
 </html>

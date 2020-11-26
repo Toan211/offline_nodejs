@@ -5,31 +5,36 @@
 <% 
 	const collection = "items";
 	const linkPrefix = systemConfig.prefixAdmin + `/${collection}/`;
+	console.log(statusFilter);
 %>
 
 <%- locals.flash %>
-<div class="row">
+<div class="row" style="margin-left: 0px;">
 	<div class="col-lg-12">
-		<div class="panel panel-info">
-			<div class="panel-heading">
+		<div class="card card-info card-outline">
+			<div class="card-header">
 				Search & Filter
+				<!--status all-->
 				<a href="<%= linkPrefix %>status/all">
 					<span id="icon-reload" class="glyphicon glyphicon-refresh"></span>
 				</a>
 			</div>
 
-			<div class="panel-body">
-				<div class="row">
+			<div class="card-body">
+				<div class="row justify-content-between">
+					<!--status filter-->
 					<div class="status-list col-sm-6 pl0">
 						<%- filterStatusHelper(collection, statusFilter, keyword) %>	 
 					</div>
 					<div class="col-sm-6">
+						<!--get status for search-->
 						<form action="<%= linkPrefix %>status/<%= currentStatus %>" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" name="keyword" placeholder="Search for..." value="<%= keyword %>">
 								<span class="input-group-btn">
 									<button class="btn btn-info" type="submit">Search</button>
 								</span>
+								<!--clear-->
 								<span class="input-group-btn">
 									<a class="btn btn-success" type="button" href="<%= linkPrefix %>status/<%= currentStatus %>">Clear</a>
 								</span>
@@ -42,16 +47,16 @@
 	</div>
 
 	<div class="col-lg-12">
-		<div class="panel panel-info">
-			<div class="panel-heading">List Items</div>
-			<div class="panel-body">
+		<div class="card card-info card-outline">
+			<div class="card-header">List Items</div>
+			<div class="card-body">
 				<form role="form" class="form-inline zt-form" id="zt-form" action="" method="post">
 					<%- actionHelper(collection) %>
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-bordered table-hover text-nowrap btn-table mb-0">
 							<thead>
 								<tr>
-									<th><input type="checkbox" class="cbAll" /></th>
+									<th><input type="checkbox" class="cbAll custom-control custom-checkbox" /></th>
 									<th>#</th>
 									<th>Name</th>
 									<th>Status</th>

@@ -58,7 +58,7 @@ app.set('layout', __path_views + 'backend');
 // app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 
 // Local variable
 app.locals.systemConfig = systemConfig;
