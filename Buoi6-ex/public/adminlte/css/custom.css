@@ -105,3 +105,8 @@ tr.my-read-only {
 #icon-reload {
     float: right;
 }
+
+a.my-active {
+    background-color: rgba(255, 255, 255, .1);
+    color: #fff;
+}

@@ -1,3 +1,18 @@
+<% 
+    let arrMenu = [
+        {name: 'Dashboard', icon: 'fa-tachometer-alt', link: `${systemConfig.prefixAdmin}/dashboard`, data: 'dashboard'},
+        {name: 'Items', icon: 'fa-users', link: `${systemConfig.prefixAdmin}/items`, data: 'items'},
+    ];
+    let xhtmlMenu = '';
+    arrMenu.forEach( (menu) => {
+        xhtmlMenu += `<li class="nav-item">
+                <a href="${menu.link}" class="nav-link" data-active="${menu.data}">
+                    <i class="nav-icon fas ${menu.icon}"></i>
+                    <p>${menu.name}</p>
+            </a>
+        </li>`;
+    });
+%>
 
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
@@ -19,21 +34,11 @@
         </div>
 
         <!-- Sidebar Menu -->
+        
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="<%= systemConfig.prefixAdmin %>/dashboard" class="nav-link" data-active="dashboard">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="<%= systemConfig.prefixAdmin %>/items" class="nav-link" data-active="index">
-                        <i class="nav-icon fas fa-list-ul"></i>
-                        <p>items</p>
-                    </a>
-                </li>
+                <%- xhtmlMenu %>
 
                        
                 

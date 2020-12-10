@@ -16,19 +16,18 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-left">
                         <div class="col-lg-3 col-6">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3> 
-                                      <%
-                                        
+                                      <%= totalItems
                                       %>
                                     </h3>
-                                    <p>User</p>
+                                    <p>Items</p>
                                 </div>
                                 <div class="icon text-white">
-                                    <i class="ion ion-ios-people"></i>
+                                    <i class="ion ion-clipboard"></i>
                                 </div>
                                 <a href="<%= systemConfig.prefixAdmin %>/items/"" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>

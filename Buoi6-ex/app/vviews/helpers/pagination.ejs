@@ -17,13 +17,13 @@
             else link += '?page=';
 
             if(currentPage > 1){
-                xhtmlStart = `<li><a class="page-link" href="${link}1">Start</a></li>`;
-                xhtmlPrevious = `<li><a class="page-link" href="${link}${currentPage-1}">Previous</a></li>`;
+                xhtmlStart = `<li><a class="page-link" href="${link}1"><i class="fas fa-angle-double-left"></i></a></li>`;
+                xhtmlPrevious = `<li><a class="page-link" href="${link}${currentPage-1}"><i class="fas fa-angle-left"></i></a></li>`;
             }
 
             if(currentPage < totalPages){
-                xhtmlEnd = `<li><a class="page-link" href="${link}${totalPages}">End</a></li>`;
-                xhtmlNext = `<li><a class="page-link" href="${link}${currentPage+1}">Next</a></li>`;
+                xhtmlEnd = `<li><a class="page-link" href="${link}${totalPages}"><i class="fas fa-angle-double-right"></i></a></li>`;
+                xhtmlNext = `<li><a class="page-link" href="${link}${currentPage+1}"><i class="fas fa-angle-right"></i></a></li>`;
             }
 
             let middle = Math.ceil(pageRanges/2);
