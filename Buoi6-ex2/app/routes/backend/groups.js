@@ -20,7 +20,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 	let objWhere	 = {};
 	let keyword		 = ParamsHelpers.getParam(req.query, 'keyword', '');
 	let currentStatus= ParamsHelpers.getParam(req.params, 'status', 'all'); 
-	let statusFilter = await UtilsHelpers.createFilterStatus(currentStatus);
+	let statusFilter = await UtilsHelpers.createFilterStatus(currentStatus, 'groups');
 	let sortField	 = ParamsHelpers.getParam(req.session, 'sort_field', 'ordering'); 
 	let sortType	 = ParamsHelpers.getParam(req.session, 'sort_type', 'asc'); 
 	let sort		= {};
@@ -43,7 +43,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 	
 	GroupsModel
 		.find(objWhere)
-		.select('name status ordering created modified')
+		.select('name status ordering created modified group_acp')
 		.sort(sort)
 		.skip((pagination.currentPage-1) * pagination.totalItemsPerPage)
 		.limit(pagination.totalItemsPerPage)
@@ -79,6 +79,26 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	
 	GroupsModel.updateOne({_id: id}, data, (err, result) => {
 		req.flash('success', notify.CHANGE_STATUS_SUCCESS, false);
+		res.redirect(linkIndex);
+	});
+});
+
+// Change Group ACP
+router.get('/change-group-acp/:id/:group_acp', (req, res, next) => {
+	let currentGroupAcp	= ParamsHelpers.getParam(req.params, 'group_acp', 'yes'); 
+	let id				= ParamsHelpers.getParam(req.params, 'id', ''); 
+	let groupACP			= (currentGroupAcp === "yes") ? "no" : "yes";
+	let data = {
+		group_acp: groupACP,
+		modified: {
+			user_id: 1,
+			user_name: "Status1",
+			time: Date.now()
+		}
+	}
+	
+	GroupsModel.updateOne({_id: id}, data, (err, result) => {
+		req.flash('success', notify.CHANGE_GROUP_ACP_SUCCESS, false);
 		res.redirect(linkIndex);
 	});
 });
@@ -193,6 +213,7 @@ router.post('/save', (req, res, next) => {
 				name: item.name,
 				status: item.status,
 				content: item.content,
+				group_acp: item.group_acp,
 				modified: {
 					user_id: 1,
 					user_name: "editModified",

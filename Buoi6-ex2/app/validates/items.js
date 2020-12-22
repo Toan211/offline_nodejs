@@ -25,7 +25,7 @@ module.exports = {
 
             // CONTENT
         req.checkBody('content', util.format(notify.ERROR_NAME, options.content.min, options.content.max))
-        .isLength({gt: options.content.min, lt: options.content.max});
+        .isLength({min: options.content.min, max: options.content.max});
 
     }
 }
