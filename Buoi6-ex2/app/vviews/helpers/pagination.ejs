@@ -1,5 +1,5 @@
 <%
-    paginationHelper = (paginationObj, type, currentStatus, keyword) => {
+    paginationHelper = (paginationObj, linkPrefix, currentStatus, keyword) => {
         let totalItems          = paginationObj.totalItems;
         let totalItemsPerPage   = paginationObj.totalItemsPerPage;
         let totalPages          = Math.ceil(totalItems/totalItemsPerPage);
@@ -16,7 +16,7 @@
             let xhtmlPages = '';
             let xhtmlNext = '<li class="page-item disabled"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>' ;
             let xhtmlEnd = '<li class="page-item disabled"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>';
-            let link       = systemConfig.prefixAdmin + '/' + type +'/status/' + currentStatus ;
+            let link       = linkPrefix +'status/' + currentStatus ;
             if(keyword !== '') link += '?keyword=' + keyword + '&page=';
             else link += '?page=';
 
