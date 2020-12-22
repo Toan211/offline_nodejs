@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./elements/head.ejs %>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed text-sm">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <% include ./elements/navbar.ejs %>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <% include ./elements/sidebar.ejs %>
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <%- body %>
+        <!-- /.content-wrapper -->
+        <% include ./elements/footer.ejs %>
+
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- script -->
+    <% include ./elements/script.ejs %>
+
+</body>
+
+</html>

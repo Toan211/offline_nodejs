@@ -1,0 +1,6 @@
+<% 
+    sourceByHelper = (user_name, time) => { 
+        return   `<span class="fas fa-user" aria-hidden="true"> ${user_name} </span><br>
+			    <span class="fas fa-calendar" aria-hidden="true"> ${moment(time).format('DD-MM-YYYY')} </span>`
+    } 
+%>

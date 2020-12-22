@@ -1,0 +1,42 @@
+<% include ./../../helpers/filter-status %>
+<% include ./../../helpers/action %>
+<% include ./../../helpers/pagination %>
+<% include ./../../helpers/status %>
+<% 
+	 
+	const collection = "items";
+	const linkPrefix = systemConfig.prefixAdmin + `/${collection}/`;
+
+%>
+
+<% 
+    let arrDashboard = [
+        {name: 'Items', icon: 'ion-clipboard', link: `${systemConfig.prefixAdmin}/items`},
+        
+    ];
+    let xhtmlDashboard = '';
+    arrDashboard.forEach( (item) => {
+        xhtmlDashboard += `<div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>${totalItems} </h3>
+                    <p>${item.name}</p>
+                </div>
+                <div class="icon text-white">
+                    <i class="ion ${item.icon}"></i>
+                </div>
+                <a href="${item.link}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>`;
+    });
+%>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-left">
+            <%- xhtmlDashboard %>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
