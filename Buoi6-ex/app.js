@@ -27,8 +27,8 @@ const systemConfig = require(__path_configs + 'system');
 const databaseConfig = require(__path_configs + 'database');
 
 
-mongoose.connect(`mongodb://${databaseConfig.username}:${databaseConfig.password}@ds117590.mlab.com:17590/${databaseConfig.database}`);
-
+//mongoose.connect(`mongodb://${databaseConfig.username}:${databaseConfig.password}@ds117590.mlab.com:17590/${databaseConfig.database}`);
+mongoose.connect(`mongodb+srv://${databaseConfig.username}:${databaseConfig.password}@cluster01.em0e0.mongodb.net/${databaseConfig.database}?retryWrites=true&w=majority`);
 
 var app = express();
 app.use(cookieParser());

@@ -4,3 +4,9 @@ let currentMenu = arrMenu[2];
 console.log(currentMenu);
 
 $('li.nav-item a[data-active="' + currentMenu + '"]').addClass('my-active');
+
+
+
+
+
+
