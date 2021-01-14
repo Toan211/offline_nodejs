@@ -4,7 +4,7 @@ const util = require('util');
 
 const systemConfig  = require(__path_configs + 'system');
 const notify  		= require(__path_configs + 'notify');
-const ItemsModel 	= require(__path_schemas + 'items');
+const ItemsModel 	= require(__path_models + 'items');
 const ValidateItems	= require(__path_validates + 'items');
 const UtilsHelpers 	= require(__path_helpers + 'utils');
 const ParamsHelpers = require(__path_helpers + 'params');
@@ -17,47 +17,23 @@ const folderView	 = __path_views + 'pages/items/';
 
 // List items
 router.get('(/status/:status)?', async (req, res, next) => {
-	let objWhere	 = {};
-	let keyword		 = ParamsHelpers.getParam(req.query, 'keyword', '');
-	let currentStatus= ParamsHelpers.getParam(req.params, 'status', 'all'); 
-	let statusFilter = await UtilsHelpers.createFilterStatus(currentStatus, 'items');
-	let sortField	 = ParamsHelpers.getParam(req.session, 'sort_field', 'ordering'); 
-	let sortType	 = ParamsHelpers.getParam(req.session, 'sort_type', 'asc'); 
-	let sort		= {};
-	sort[sortField]	= sortType;
 
+	let params = ParamsHelpers.createParam(req);
+	let statusFilter = await UtilsHelpers.createFilterStatus(params.currentStatus, 'items');
 
-	let pagination 	 = {
-		totalItems		 : 1,
-		totalItemsPerPage: 3,
-		currentPage		 : parseInt(ParamsHelpers.getParam(req.query, 'page', 1)),
-		pageRanges		 : 3
-	};
-
-	if(currentStatus !== 'all') objWhere.status = currentStatus;
-	if(keyword !== '') objWhere.name = new RegExp(keyword, 'i');
-
-	await ItemsModel.count(objWhere).then( (data) => {
-		pagination.totalItems = data;
+	await ItemsModel.countItems(params).then( (data) => {
+		params.pagination.totalItems = data;
 	});
 	
-	ItemsModel
-		.find(objWhere)
-		.select('name status ordering created modified')
-		.sort(sort)
-		.skip((pagination.currentPage-1) * pagination.totalItemsPerPage)
-		.limit(pagination.totalItemsPerPage)
+	
+	ItemsModel.listItems(params)
 		.then( (items) => {
 			res.render(`${folderView}list`, { 
 				pageTitle: pageTitleIndex,
-				titleMenu: 'group',
+				titleMenu: 'Items',
 				items,
 				statusFilter,
-				pagination,
-				currentStatus,
-				keyword,
-				sortField,
-				sortType
+				params
 
 			});
 		});
@@ -67,17 +43,9 @@ router.get('(/status/:status)?', async (req, res, next) => {
 router.get('/change-status/:id/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active'); 
 	let id				= ParamsHelpers.getParam(req.params, 'id', ''); 
-	let status			= (currentStatus === "active") ? "inactive" : "active";
-	let data = {
-		status: status,
-		modified: {
-			user_id: 1,
-			user_name: "Status1",
-			time: Date.now()
-		}
-	}
 	
-	ItemsModel.updateOne({_id: id}, data, (err, result) => {
+	
+	ItemsModel.changeStatus(id, currentStatus, {task:"update-one"}).then((result) => {
 		req.flash('success', notify.CHANGE_STATUS_SUCCESS, false);
 		res.redirect(linkIndex);
 	});
@@ -87,17 +55,9 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 router.post('/change-status/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active'); 
 
-	let data = {
-		status: currentStatus,
-		modified: {
-			user_id: 1,
-			user_name: "statusMulti",
-			time: Date.now()
-		}
-	}
-
-	ItemsModel.updateMany({_id: {$in: req.body.cid }}, data , (err, result) => {
-		req.flash('success', util.format(notify.CHANGE_STATUS_MULTI_SUCCESS, result.n) , false);
+	
+	ItemsModel.changeStatus(req.body.cid, currentStatus, {task:"update-multi"} ).then((result) => {
+		req.flash('success', util.format(notify.CHANGE_STATUS_SUCCESS, result.n));
 		res.redirect(linkIndex);
 	});
 });

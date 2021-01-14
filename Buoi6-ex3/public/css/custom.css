@@ -1,0 +1,74 @@
+div.zcontrols {
+    margin-bottom: 20px;
+}
+
+div.zcontrols select {
+    width: 200px;
+    display: inline-block;
+}
+
+li.active > a:first-child{
+    color: #000;
+}
+.status-list{
+    margin-bottom: 15px;
+}
+#icon-reload{
+    float: right;
+}
+.input-group-btn a {
+    color: white;
+}
+/* #pagination .panel-body{
+    display: flex;
+    justify-content: space-between;
+} */
+#pagination .panel-heading span{
+    float: right;
+    margin-right: 10px;
+    line-height: 15px;
+}
+
+.infor-pagination span{
+    color: blue;
+    font-weight: bold;
+}
+.infor-pagination{
+    float: left;
+}
+.ad-pagination{
+    float: right;
+}
+
+img.error-page-img {
+    width: 800px;
+}
+
+.label-warning {
+    background-color: #f0ad4e;
+}
+
+.label-danger {
+    background-color: #d9534f;
+}
+
+.label-success {
+    background-color: #5cb85c;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.highlight {
+    background-color: yellow;
+}

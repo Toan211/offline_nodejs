@@ -19,5 +19,6 @@ module.exports = {
     password: 'Nodejs_Training1',
     database: 'training_nodejs1',
     col_items: 'items',
-    col_groups: 'groups'
+    col_groups: 'groups',
+    col_users: 'users'
 };
