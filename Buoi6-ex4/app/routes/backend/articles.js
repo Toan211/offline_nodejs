@@ -31,7 +31,7 @@ router.get('(/status/:status)?', async (req, res, next) => {
 	let groupsItems	= [];
 	await GroupsModel.listItemsInSelectbox().then((items)=> {
 		groupsItems = items;
-		groupsItems.unshift({_id: 'allvalue', name: 'All group'});
+		groupsItems.unshift({_id: 'allvalue', name: 'All Category'});
 	});
 
 	//console.log(params);
@@ -57,6 +57,16 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	MainModel.changeStatus(id, currentStatus, {task: "update-one"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
 });
+
+// Change special
+router.get('/change-special/:id/:special', (req, res, next) => {
+	let currentSpecial	= ParamsHelpers.getParam(req.params, 'special', 'active');
+	let id				= ParamsHelpers.getParam(req.params, 'id', '');
+
+	MainModel.changeSpecial(id, currentSpecial, {task: "update-one"})
+		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-special'}));
+});
+
 
 // Change status - Multi
 router.post('/change-status/:status', (req, res, next) => {
@@ -93,12 +103,12 @@ router.post('/delete', (req, res, next) => {
 // FORM
 router.get(('/form(/:id)?'), async(req, res, next) => {
 	let id		= ParamsHelpers.getParam(req.params, 'id', '');
-	let item	= {name: '', ordering: 0, status: 'novalue', group_id: '', group_name: ''};
+	let item	= {name: '', ordering: 0, status: 'novalue', group_id: '', group_name: '', content:'',  special: 'novalue'};
 
 	let groupsItems	= [];
 	await GroupsModel.listItemsInSelectbox().then((items)=> {
 		groupsItems = items;
-		groupsItems.unshift({_id: 'allvalue', name: 'All group'});
+		groupsItems.unshift({_id: 'allvalue', name: 'All category'});
 	});
 	
 	let errors   = null;
@@ -111,6 +121,7 @@ router.get(('/form(/:id)?'), async(req, res, next) => {
 			res.render(`${folderView}form`, { pageTitle: pageTitleEdit, controllerName, item, errors, groupsItems});
 		});	
 	}
+	
 });
 
 // SAVE = ADD EDIT
@@ -130,7 +141,7 @@ router.post('/save', async(req, res, next) => {
 			let groupsItems	= [];
 			await GroupsModel.listItemsInSelectbox().then((items)=> {
 				groupsItems = items;
-				groupsItems.unshift({_id: 'allvalue', name: 'All group'});
+				groupsItems.unshift({_id: 'allvalue', name: 'All category'});
 			});
 			
 			if (taskCurrent == "edit") item.avatar = item.image_old;

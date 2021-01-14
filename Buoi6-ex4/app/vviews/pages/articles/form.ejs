@@ -12,9 +12,10 @@
 		{ for: 'name', label: 'Name', input: inputHelper('name', item.name ) },
 		{ for: 'ordering', label: 'Ordering', input: inputHelper('ordering', item.ordering ) },
 		{ for: 'avatar', label: 'Avatar', input: inputHelper('avatar', item.avatar, 'file' ) },
-		{ for: 'Show-avatar', label: 'Avatar', input: imageHelper(folderUpload, item.avatar, item.name, 'img-avatar-form', 'load-avatar' ) },
+		{ for: 'Show-avatar', label: 'Preview', input: imageHelper(folderUpload, item.avatar, item.name, 'img-avatar-form preview-avatar' ) },
 		{ for: 'status', label: 'Status', input: selectboxHelper('status', systemConfig.status_value, item.status) },
-		{ for: 'group_id', label: 'Group', input: selectboxHelper('group_id', groupsItems, item.group_id) },
+		{ for: 'special', label: 'Special', input: selectboxHelper('special', systemConfig.special_value, item.special) },
+		{ for: 'group_id', label: 'Category', input: selectboxHelper('group_id', groupsItems, item.group_id) },
 		{ for: 'content', label: 'Content', input:  textareaHelper('content', item.content ) },
 	];
 

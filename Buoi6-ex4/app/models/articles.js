@@ -15,7 +15,7 @@ module.exports = {
     
         return MainModel
             .find(objWhere)
-            .select('name status ordering created modified group.name avatar')
+            .select('name status ordering created modified group.name avatar special')
             .sort(sort)
             .skip((params.pagination.currentPage-1) * params.pagination.totalItemsPerPage)
             .limit(params.pagination.totalItemsPerPage);
@@ -54,6 +54,28 @@ module.exports = {
             return MainModel.updateMany({_id: {$in: id }}, data);
         }
     },
+
+    changeSpecial: (id, currentSpecial, options = null) => {
+        let special			= (currentSpecial === "active") ? "inactive" : "active";
+        let data 			= {
+            special: special,
+            modified: {
+                user_id: 0,
+                user_name: 0,
+                time: Date.now()
+            }
+        }
+
+        if(options.task == "update-one"){
+            return MainModel.updateOne({_id: id}, data);
+        }
+
+        if(options.task == "update-multi"){
+            data.special = currentSpecial;
+            return MainModel.updateMany({_id: {$in: id }}, data);
+        }
+    },
+
 
     changeOrdering: async (cids, orderings, options = null) => {
         let data = {
@@ -118,7 +140,8 @@ module.exports = {
             return MainModel.updateOne({_id: item.id}, {
 				ordering: parseInt(item.ordering),
 				name: item.name,
-				status: item.status,
+                status: item.status,
+                special: item.special,
 				content: item.content,
                 group: {
                     id: item.group_id,

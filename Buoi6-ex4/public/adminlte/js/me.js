@@ -1,13 +1,15 @@
+
+
 //preview upload img
-function readURL(input) {
+function readURL(input, output) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       
       reader.onload = function(e) {
-        $('#blah').attr('src', e.target.result);
+        $(output).attr('src', e.target.result);
       }
       
-      reader.readAsDataURL(input.files[0]); // convert to base64 string
+      reader.readAsDataURL(input.files[0]); 
     }
   }
 
@@ -19,6 +21,8 @@ $(document).ready(function () {
     if ($('textarea#content').length) {
         CKEDITOR.replace('content');
     }
+
+    
       
       $("#imgInp").change(function() {
         readURL(this);
@@ -144,6 +148,14 @@ $(document).ready(function () {
          window.location.pathname = linkRedirect;
     });
 
+    // fill avatar_name when choose group
+    $('select[name=avatar]').change(function() {
+        $('input[name=image_old]').val($(this).find('option:selected').text());
+    });
+
+    $("input[name=avatar]").change(function() {
+        readURL(this, 'img.preview-avatar');
+    });
     
 
 });

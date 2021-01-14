@@ -7,6 +7,11 @@ module.exports = {
 		{id: 'active', name: 'Active'},
 		{id: 'inactive', name: 'InActive'},
     ],
+    special_value: [
+        {id: 'novalue', name: 'Choose Special'},
+		{id: 'active', name: 'Active'},
+		{id: 'inactive', name: 'InActive'},
+    ],
     groupacp_value: [
         {id: 'novalue', name: 'Choose Group ACP'},
 		{id: 'yes', name: 'Yes'},

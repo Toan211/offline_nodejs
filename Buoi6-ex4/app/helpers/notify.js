@@ -8,6 +8,11 @@ let show = (req, res, linkIndex, params = null ) => {
 		case 'change-status':
 			notifyContent = notify.CHANGE_STATUS_SUCCESS;
 			break;
+		
+		case 'change-special':
+			notifyContent = notify.CHANGE_SPECIAL_SUCCESS;
+			break;
+
 		case 'change-multi-status':
 			notifyContent = util.format(notify.CHANGE_STATUS_MULTI_SUCCESS, params.total);
 			break;
