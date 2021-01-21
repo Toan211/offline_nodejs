@@ -15,7 +15,7 @@ const linkIndex		 = '/' + systemConfig.prefixAdmin + `/${controllerName}/`;
 const pageTitleIndex = UtilsHelpers.capitalize(controllerName) + ' Management';
 const pageTitleAdd   = pageTitleIndex + ' - Add';
 const pageTitleEdit  = pageTitleIndex + ' - Edit';
-const folderView	 = __path_views + `pages/${controllerName}/`;
+const folderView	 = __path_views_admin + `pages/${controllerName}/`;
 
 // List items
 router.get('(/status/:status)?', async (req, res, next) => {

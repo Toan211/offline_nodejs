@@ -9,8 +9,9 @@ module.exports = {
     folder_validates    : 'validates',
     folder_middleware   : 'middleware',
     folder_views        : 'vviews',
-    folder_module_admin : 'admin69',
+    folder_module_admin : 'admin',
     folder_module_blog  : 'blog',
     folder_public       : 'public',
-    folder_uploads      : 'uploads'
+    folder_uploads      : 'uploads',
+    
 };
