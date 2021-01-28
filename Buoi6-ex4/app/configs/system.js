@@ -1,7 +1,9 @@
 
 module.exports = {
     prefixAdmin: 'adminCCC',
+    prefixBlog: '',
     format_long_time: 'DD-MM-YYYY',
+    format_date: 'DD-MM-YYYY',
     status_value: [
         {id: 'novalue', name: 'Choose Status'},
 		{id: 'active', name: 'Active'},

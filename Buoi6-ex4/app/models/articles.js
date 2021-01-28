@@ -10,9 +10,9 @@ module.exports = {
         if(params.currentStatus !== 'all') objWhere.status = params.currentStatus;
         if(params.keyword !== '') objWhere.name = new RegExp(params.keyword, 'i');
         if(params.groupID !== 'allvalue' && params.groupID !== '') objWhere['group.id'] = params.groupID;
-        
+
         sort[params.sortField]  = params.sortType;
-    
+
         return MainModel
             .find(objWhere)
             .select('name status ordering created modified group.name avatar special')
@@ -21,13 +21,59 @@ module.exports = {
             .limit(params.pagination.totalItemsPerPage);
     },
 
+    listItemsFrontend: (params = null, options = null) => {
+        let find = {};
+        let select = 'name created.user_name created.time group.id group.name avatar';
+        let limit = 3;
+        let sort = '';
+
+        if (options.task == 'items-special'){
+            find = {special: 'active'};
+            sort = {ordering: 'asc'};
+        }
+
+        if (options.task == 'items-news'){
+            select = 'name created.user_name created.time group.name group.id  avatar content';
+            find = {status:'active'};
+            sort = {'created.time': 'desc'};
+        }
+
+        if (options.task == 'items-in-category'){
+            select = 'name created.user_name created.time group.name avatar content';
+            find = {status:'active', 'group.id': params.id};
+            sort = {'created.time': 'desc'};
+        }
+
+
+        if (options.task == 'items-random'){
+            return MainModel.aggregate([
+                    { $match: { status: 'active' }},
+                    { $project : {name : 1 , created : 1 ,thumb: 1}  },
+                    { $sample: {size: 3}}
+                ]);
+        }
+        if (options.task == 'items-others'){
+            select = 'name created.user_name created.time group.id group.name avatar content';
+            find = {status:'active', '_id': {$ne: params._id}, 'group.id': params.group.id};
+            sort = {'created.time': 'desc'};
+        }
+
+        return MainModel.find(find).select(select).limit(limit).sort(sort);
+
+    },
+
     getItem: (id, options = null) => {
         return MainModel.findById(id);
     },
 
+    getItemFrontend: (id, options = null) => {
+        return MainModel.findById(id)
+            .select('name avatar created content group.name group.id');
+    },
+
     countItem: (params, options = null) => {
         let objWhere    = {};
-        
+
         if(params.currentStatus !== 'all') objWhere.status = params.currentStatus;
         if(params.keyword !== '') objWhere.name = new RegExp(params.keyword, 'i');
 
@@ -79,7 +125,7 @@ module.exports = {
 
     changeOrdering: async (cids, orderings, options = null) => {
         let data = {
-            ordering: parseInt(orderings), 
+            ordering: parseInt(orderings),
             modified:{
                 user_id: 0,
                 user_name: 0,
@@ -111,7 +157,7 @@ module.exports = {
                 for(let index = 0; index < id.length; index++){
                     await MainModel.findById(id[index]).then((item) => {
                         FileHelpers.remove(uploadFolder, item.avatar);
-                    }); 
+                    });
                 }
             }else{
                 await MainModel.findById(id).then((item) => {

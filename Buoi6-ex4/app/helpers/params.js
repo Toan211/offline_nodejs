@@ -18,7 +18,7 @@ let createParam = (req) => {
 
 	params.pagination  	 = {
 		totalItems		 : 1,
-		totalItemsPerPage: 4,
+		totalItemsPerPage: 5,
 		currentPage		 : parseInt(getParam(req.query, 'page', 1)),
 		pageRanges		 : 3
 	};

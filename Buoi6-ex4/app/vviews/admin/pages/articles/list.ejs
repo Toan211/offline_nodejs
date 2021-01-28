@@ -2,7 +2,7 @@
 <% include ./../../helpers/action %>
 <% include ./../../helpers/pagination %>
 <% include ./../../helpers/status %>
-
+<% include ./../../helpers/special%>
 <% include ./../../helpers/highlight %>
 <% include ./../../helpers/source-by %>
 <% include ./../../helpers/sort %>
@@ -98,7 +98,7 @@
 						</td>
 						
 						<td class="text-center position-relative">
-							<%- statusHelper(linkPrefix, item.special, item.id) %>
+							<%- specialHelper(linkPrefix, item.special, item.id) %>
 						</td>
 
 						<td class="text-center">

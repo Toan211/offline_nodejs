@@ -68,7 +68,7 @@
 						<%- sortHelper(linkPrefix, 'Name', 'name', params.sortField, params.sortType, 'width:20%') %>
 						<%- sortHelper(linkPrefix, 'Status', 'status', params.sortField, params.sortType, 'width:20%') %>
 						<%- sortHelper(linkPrefix, 'Ordering', 'ordering', params.sortField, params.sortType, 'width:20%') %>
-						<%- sortHelper(linkPrefix, 'Slug', 'group_acp', params.sortField, params.sortType, 'width:20%') %>
+						<%- sortHelper(linkPrefix, 'Slug', 'slug', params.sortField, params.sortType, 'width:20%') %>
 						<th class="text-center">Created</a></th>
 						<th class="text-center">Modified</a></th>
 						<th class="text-center">Action</th>
@@ -88,7 +88,7 @@
 						<td class="text-center">
 							<input type="number" value="<%= item.ordering %>" class="text-center ordering">
 						</td>
-						<td><%= item.slug %></td>
+						<td class="text-center"><%- item.slug%></td>
 
 						<td><%- sourceByHelper(item.created.user_name, item.created.time) %></td>
 						<td><%- sourceByHelper(item.modified.user_name, item.modified.time) %>	</td>

@@ -11,6 +11,7 @@ module.exports = {
     EDIT_SUCCESS: 'Cập nhật thông tin phần tử thành công',
     ERROR_NAME: 'Chiều dài từ %d đến %d ký tự',
     ERROR_ORDERING: 'Phải là số nguyên lớn hơn %d và bé hơn %d',
+    ERROR_SLUG: 'Chiều dài từ %d đến %d ký tự',
     ERROR_STATUS: 'Phải là một giá trị khác rỗng',
     ERROR_SPECIAL: 'Phải là một giá trị khác rỗng',
     ERROR_GROUP: 'Phải là một giá trị khác rỗng',

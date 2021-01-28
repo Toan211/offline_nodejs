@@ -11,10 +11,24 @@ module.exports = {
     
         return MainModel
             .find(objWhere)
-            .select('name status ordering created modified')
+            .select('name status ordering created modified slug')
             .sort(sort)
             .skip((params.pagination.currentPage-1) * params.pagination.totalItemsPerPage)
             .limit(params.pagination.totalItemsPerPage);
+    },
+
+    listItemsFrontend: (params= null, options = null) => {
+        let find = {};
+        let select = 'name';
+        let limit = 10;
+        let sort = '';
+
+        if (options.task == 'items-in-menu'){
+            find = {status:'active'};
+            sort = {ordering: 'asc'};            
+        }
+
+        return MainModel.find(find).select(select).limit(limit).sort(sort);
     },
 
     getItem: (id, options = null) => {
@@ -96,7 +110,8 @@ module.exports = {
 				user_id : 0,
 				user_name: "admin",
 				time: Date.now()
-			}
+            }
+            
 			return new MainModel(item).save();
         }
 

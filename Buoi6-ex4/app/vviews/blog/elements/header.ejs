@@ -65,35 +65,31 @@
             <i class="lnr lnr-menu"></i>
             <span class="menu-title">Menu</span>
         </button>
+
         <div class="row align-items-center justify-content-between">
             <nav id="nav-menu-container">
                 <ul class="nav-menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
                     <li class="menu-active">
-                        <a href="index.html">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li class="menu-has-children">
-                        <a href="" class="sf-with-ul">Category</a>
+                        <a href="#" class="sf-with-ul">Category</a>
                         <ul style="display: none;">
-                            <li>
-                                <a href="#">Category1</a>
-                            </li>
-                            <li>
-                                <a href="#">Category2</a>
-                            </li>
-                            <li>
-                                <a href="#">Category3</a>
-                            </li>
-                            <li>
-                                <a href="#">Category4</a>
-                            </li>
+                            <% itemsCategory.forEach((category) => { %>  
+                                <li>
+                                    <a href="/category/<%= category.id %>"><%= category.name %></a>
+                                </li>
+                            <%})%>
                         </ul>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="/about">About</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="/contact">Contact</a>
                     </li>
+                  
+                    <%- //showMenuUser(userInfo) %>
                 </ul>
             </nav>
             <!-- #nav-menu-container -->

@@ -4,13 +4,13 @@
 <% include ./../../helpers/formBody %>
 <% 
 	const linkPrefix = systemConfig.prefixAdmin + `/${controllerName}/`;
-
+	
 	let elementsForm = [
 		
-		{ for: 'name', label: 'Name', input: inputHelper('name', item.name ) },
+		{for: 'name', label: 'Name', input: inputHelper('name', item.name, 'text', 'name_slug')},
+		{for: 'slug', label: 'Slug', input: inputHelper('slug', item.slug)},
 		{ for: 'status', label: 'Status', input: selectboxHelper('status', systemConfig.status_value, item.status) },
 		{ for: 'ordering', label: 'Ordering', input: inputHelper('ordering', item.ordering ) },
-		{ for: 'slug', label: 'Slug', input: inputHelper('slug', item.slug ) },
 		{ for: 'content', label: 'Content', input:  textareaHelper('content', item.content ) },
 	];
 

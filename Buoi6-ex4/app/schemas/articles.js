@@ -23,7 +23,7 @@ var schema = new mongoose.Schema({
         user_id: Number,
         user_name: String,
         time: Date
-    }
+    },
 });
 
 module.exports = mongoose.model(databaseConfig.col_articles, schema );

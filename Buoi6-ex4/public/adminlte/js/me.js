@@ -1,4 +1,19 @@
-
+//Create slug input
+function change_alias(alias) {
+    var str = alias;
+    str = str.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str = str.replace(/đ/g,"d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+    str = str.replace(/ *? /g,"-");
+    str = str.trim(); 
+    return str;
+}
 
 //preview upload img
 function readURL(input, output) {
@@ -147,6 +162,11 @@ $(document).ready(function () {
         var linkRedirect = '/' + path[1] + '/' +  path[2] + '/filter-group/' + $(this).val();
          window.location.pathname = linkRedirect;
     });
+
+    //slug
+    $('input#name_slug').keyup(function(){
+        $('input[name="slug"]').val(change_alias($(this).val()));
+     });
 
     // fill avatar_name when choose group
     $('select[name=avatar]').change(function() {

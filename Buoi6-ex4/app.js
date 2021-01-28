@@ -27,6 +27,7 @@ global.__path_views_admin = __path_views + pathConfig.folder_module_admin + '/';
 global.__path_views_blog  = __path_views + pathConfig.folder_module_blog + '/';
 global.__path_public    = __base + pathConfig.folder_public + '/';
 global.__path_uploads     = __path_public + pathConfig.folder_uploads + '/';
+global.__path_middleware= __path_app + pathConfig.folder_middleware + '/';
 
 
 const systemConfig = require(__path_configs + 'system');
@@ -76,7 +77,7 @@ app.locals.moment = moment;
 
 // Setup router
 app.use(`/${systemConfig.prefixAdmin}`, require(__path_routers + 'backend/index'));
-app.use('/', require(__path_routers + 'frontend/index'));
+app.use(`/${systemConfig.prefixBlog}`, require(__path_routers + 'frontend/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
