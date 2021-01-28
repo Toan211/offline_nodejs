@@ -48,7 +48,7 @@ module.exports = {
         if (options.task == 'items-random'){
             return MainModel.aggregate([
                     { $match: { status: 'active' }},
-                    { $project : {name : 1 , created : 1 ,thumb: 1}  },
+                    { $project : {name : 1 , created : 1 ,avatar: 1}  },
                     { $sample: {size: 3}}
                 ]);
         }

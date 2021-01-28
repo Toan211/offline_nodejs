@@ -90,9 +90,19 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  if(systemConfig.env == "dev") {
+    res.status(err.status || 500);
+    res.render(__path_views_admin +  'pages/error', { pageTitle   : 'Page Not Found ' });
+  }
+
   // render the error page
-  res.status(err.status || 500);
-  res.render(__path_views_admin +  'pages/error', { pageTitle   : 'Page Not Found ' });
+  if(systemConfig.env == "production") {
+    res.status(err.status || 500);
+    res.render(__path_views_blog +  'pages/error', {
+      top_post: false,
+      layout: __path_views_blog + 'frontend'
+    });
+  }
 });
 
 module.exports = app;

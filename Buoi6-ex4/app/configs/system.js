@@ -4,6 +4,7 @@ module.exports = {
     prefixBlog: '',
     format_long_time: 'DD-MM-YYYY',
     format_date: 'DD-MM-YYYY',
+    env: 'dev', // production dev
     status_value: [
         {id: 'novalue', name: 'Choose Status'},
 		{id: 'active', name: 'Active'},
