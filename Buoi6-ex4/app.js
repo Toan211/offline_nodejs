@@ -4,12 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 const validator = require('express-validator');
 const session = require('express-session');
 const flash = require('express-flash-notification');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 var moment = require('moment');
+var Parser = require('rss-parser');
 
 const pathConfig = require('./path');
 
