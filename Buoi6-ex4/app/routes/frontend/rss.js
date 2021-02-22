@@ -21,8 +21,7 @@ router.get('/', async (req, res, next) => {
 	res.render(`${folderView}index`, {
 		layout: layoutBlog,
 		top_post: false,
-		items,
-		feed
+		items
 	});
 });
 

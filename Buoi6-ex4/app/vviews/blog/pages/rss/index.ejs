@@ -1,6 +1,6 @@
-
+<% include ./../../helpers/get-image-src %>
 <script>
-	console.log(items.content);
+	
 </script>
 
 <div class="col-lg-8 post-list">
@@ -14,14 +14,15 @@
 		</div>	
 
 		<%= //JSON.stringify(feed) %> 
-		<%-// items %> 
+		<%- //console.log(items.content); %> 
 		
 		<% items.forEach((item)=> { %>
+            <%- //console.log(item.content); %> 
             <div class="single-latest-post row align-items-center">
                 <div class="col-lg-5 post-left">
                     <div class="feature-img relative">
                         <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="<%= //folder_uploads + item.avatar %>" alt="<%= item.title %>">
+                        <img class="img-fluid" src="<%= getImageSrc(item.content) %>" alt="<%= item.title %>">
                     </div>
                 </div>
                 <div class="col-lg-7 post-right">
