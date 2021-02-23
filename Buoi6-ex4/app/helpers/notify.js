@@ -39,7 +39,7 @@ let show = (req, res, linkIndex, params = null ) => {
 			break;
 	}
 
-	req.flash('success', notifyContent , false);
+	req.flash('success', notifyContent);
 	res.redirect(linkIndex);
 }
 

@@ -1,3 +1,7 @@
+<% 
+	const linkPrefix = systemConfig.prefixBlog + `/auth/logout/`;
+%>
+
 <ul class="nav navbar-top-links navbar-right">
 
 	<li class="dropdown">
@@ -16,7 +20,7 @@
 			</li>
 			<li class="divider"></li>
 			<li>
-				<a href="login.html">
+				<a href="<%= linkPrefix %>">
 					<i class="fa fa-sign-out fa-fw"></i> Logout</a>
 			</li>
 		</ul>

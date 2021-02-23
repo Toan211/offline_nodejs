@@ -1,3 +1,7 @@
+<% 
+	const linkPrefix = systemConfig.prefixBlog + `/auth/logout/`;
+%>
+
 <%  
     let arrMenu = [
         {name: 'Dashboard', icon: 'fa-tachometer-alt', link: `${systemConfig.prefixAdmin}/dashboard`},
@@ -44,8 +48,18 @@ icon: 'fa-minus'
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <%- xhtmlMenu %>
             </ul>
+
+            <ul class="dropdown-menu dropdown-user">
+	
+                <li>
+                    <a href="<%= linkPrefix %>">
+                        <i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+
         </nav>
         <!-- /.sidebar-menu -->
+
     </div>
     <!-- /.sidebar -->
 </aside>

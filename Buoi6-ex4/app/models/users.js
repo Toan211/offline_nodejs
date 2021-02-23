@@ -25,6 +25,13 @@ module.exports = {
         return MainModel.findById(id);
     },
 
+    getItemByUsername: (username, options = null) => {
+        if(options == null) {
+            return MainModel.find({status:'active', username: username})
+                            .select('username password avatar status group.name')
+        } 
+    },
+
     countItem: (params, options = null) => {
         let objWhere    = {};
         

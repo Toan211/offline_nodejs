@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const passport = require('passport')
 
 const validator = require('express-validator');
 const session = require('express-session');
-const flash = require('express-flash-notification');
+var flash = require('connect-flash');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 var moment = require('moment');
@@ -47,12 +47,23 @@ app.use(cookieParser());
 app.use(session({
   secret: 'abcnhds',
   resave: false,
-  saveUninitialized: true}
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 5*60*1000
+  }
+}
 ));
-app.use(flash(app, {
-   viewName: __path_views_admin + 'elements/notify',
- }));
- 
+
+require(__path_configs + 'passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+app.use(function(req, res, next) {
+  res.locals.messages = req.flash();
+  next();
+});
+
 app.use(validator({
   customValidators: {
     isNotEqual: (value1, value2) => {

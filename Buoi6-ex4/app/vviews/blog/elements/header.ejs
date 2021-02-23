@@ -1,3 +1,9 @@
+<% include ./../helpers/show-menu-user %>
+<% 
+const linkLogin = systemConfig.prefixBlog + `/auth/login`;
+%>
+
+
 <header>
 
     <div class="header-top">
@@ -93,7 +99,7 @@
                         <a href="/rss">RSS</a>
                     </li>
 
-                    <%- //showMenuUser(userInfo) %>
+                    <%- showMenuUser(userInfo) %>
                 </ul>
             </nav>
             <!-- #nav-menu-container -->
