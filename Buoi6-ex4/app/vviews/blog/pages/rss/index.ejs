@@ -1,8 +1,5 @@
 <% include ./../../helpers/get-image-src %>
-<script>
-	
-</script>
-
+<% include ./../../helpers/format-date %>
 <div class="col-lg-8 post-list">
 	
 	<!-- Start single-post Area -->
@@ -13,7 +10,7 @@
 			<h3>RSS Page</h3>
 		</div>	
 
-		<%= //JSON.stringify(feed) %> 
+		<%= JSON.stringify(GoldItems[0].$.type) %> 
 		<%- //console.log(items.content); %> 
 		
 		<% items.forEach((item)=> { %>
@@ -42,4 +39,40 @@
         
 
 	</div>
+</div>
+
+
+
+
+
+<%= //JSON.stringify(itemsRandom) %> 
+<div class="col-lg-4">
+    <div class="sidebars-area">
+        <h4>Giá vàng</h4></br>
+        <table style="table-layout: fixed;" class="table table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th style="width:60%;" class="text-center align-middle">Loại vàng</th>
+                    <th class="text-center">Mua</th>
+                    <th class="text-center">Bán</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <% GoldItems.forEach((GoldItem)=> { %>
+                <tr>
+                    <td style="word-wrap:break-word "><%= GoldItem.$.type %></td>
+                    <td class="text-center align-middle"><%= GoldItem.$.buy %></td>
+                    <td class="text-center align-middle"><%= GoldItem.$.sell %></td>
+                    
+
+                    
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+        
+    </div>
 </div>

@@ -19,6 +19,7 @@ router.get('/:id', async (req, res, next) => {
 	res.render(`${folderView}index`, {
 		layout: layoutBlog,
 		top_post: false,
+		silde_bar: true,
 		itemsInCategory
 	});
 });

@@ -102,6 +102,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render(__path_views_blog +  'pages/error', {
       top_post: false,
+      silde_bar: true,
       layout: __path_views_blog + 'frontend'
     });
   }

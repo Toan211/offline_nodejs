@@ -16,7 +16,9 @@
 				<div class="container no-padding">
 					<div class="row">
 						<%- body %>
+						<% if(silde_bar == true){ %>
                         <% include ./elements/sildebar %>
+						<% } %>
 					</div>
 				</div>
 			</section>
