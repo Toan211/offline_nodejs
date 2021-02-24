@@ -119,6 +119,7 @@ module.exports = {
             return MainModel.updateOne({_id: item.id}, {
 				ordering: parseInt(item.ordering),
 				name: item.name,
+                slug: item.slug,
 				status: item.status,
 				content: item.content,
 				modified: {

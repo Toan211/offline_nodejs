@@ -4,7 +4,7 @@ const notify= require(__path_configs + 'notify');
 const options = {
     name: { min: 5, max: 30 },
     ordering: { min: 0, max: 100 },
-    status: { value: 'novalue' },
+    status: { value: 'allvalue' },
     content: { min: 5, max: 200 },
 }
 

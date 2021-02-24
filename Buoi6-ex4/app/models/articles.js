@@ -15,7 +15,7 @@ module.exports = {
 
         return MainModel
             .find(objWhere)
-            .select('name status ordering created modified group.name avatar special')
+            .select('name slug status ordering created modified group.name avatar special')
             .sort(sort)
             .skip((params.pagination.currentPage-1) * params.pagination.totalItemsPerPage)
             .limit(params.pagination.totalItemsPerPage);
@@ -60,6 +60,11 @@ module.exports = {
 
         return MainModel.find(find).select(select).limit(limit).sort(sort);
 
+    },
+
+    getMainArticle: (id, option = null) => {
+        let select = 'name created category.name category.id thumb summary content';
+        return Model.findById(id).select(select);
     },
 
     getItem: (id, options = null) => {
@@ -189,14 +194,16 @@ module.exports = {
                 status: item.status,
                 special: item.special,
 				content: item.content,
+                slug: item.slug,
+                avatar: item.avatar,
                 group: {
                     id: item.group_id,
                     name: item.group_name,
                 },
 				modified: {
-					user_id : 0,
-        			user_name: 0,
-        			time: Date.now()
+					user_id: item.id, 
+					user_name: item.username,
+					time: Date.now()
 				}
 			});
         }

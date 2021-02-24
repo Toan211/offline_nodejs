@@ -4,9 +4,11 @@ const notify= require(__path_configs + 'notify');
 const options = {
     name: { min: 5, max: 30 },
     ordering: { min: 0, max: 100 },
-    status: { value: 'novalue' },
+    status: { value: 'allvalue' },
     content: { min: 5, max: 200 },
     group: { value: 'allvalue' },
+    username: { min: 3, max: 20 },
+    password: { min: 3, max: 10 },
 }
 
 module.exports = {
@@ -30,6 +32,13 @@ module.exports = {
              // GROUP
         req.checkBody('group_id', notify.ERROR_GROUP)
         .isNotEqual(options.group.value);
+
+        req.checkBody('username', util.format(notify.ERROR_NAME, options.username.min, options.username.max) )
+            .isLength({ min: options.username.min, max: options.username.max })
+
+        // password
+        req.checkBody('password', util.format(notify.ERROR_NAME, options.password.min, options.password.max) )
+            .isLength({ min: options.password.min, max: options.password.max })
 
         let errors = req.validationErrors() !== false ? req.validationErrors() : [];
 

@@ -4,7 +4,7 @@ const notify= require(__path_configs + 'notify');
 const options = {
     name: { min: 5, max: 30 },
     ordering: { min: 0, max: 100 },
-    status: { value: 'novalue' },
+    status: { value: 'allvalue' },
     slug: { min: 5, max: 30 },
     content: { min: 5, max: 200 },
 }
@@ -24,8 +24,8 @@ module.exports = {
             .isNotEqual(options.status.value);
         
         // SLUG
-        req.checkBody('slug', util.format(notify.ERROR_SLUG, options.name.min, options.name.max) )
-        .isLength({ min: options.name.min, max: options.name.max })
+        req.checkBody('slug', util.format(notify.ERROR_SLUG, options.slug.min, options.slug.max) )
+            .isLength({ min: options.slug.min, max: options.slug.max });
             
         // CONTENT
         req.checkBody('content', util.format(notify.ERROR_NAME, options.content.min, options.content.max) )

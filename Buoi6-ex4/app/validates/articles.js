@@ -4,10 +4,11 @@ const notify= require(__path_configs + 'notify');
 const options = {
     name: { min: 5, max: 80  },
     ordering: { min: 0, max: 100 },
-    status: { value: 'novalue' },
-    special: { value: 'novalue' },
+    status: { value: 'allvalue' },
+    special: { value: 'allvalue' },
     content: { min: 5, max: 1000 },
     group: { value: 'allvalue' },
+    slug: { min: 5, max: 80 },
 }
 
 module.exports = {
@@ -16,6 +17,9 @@ module.exports = {
         req.checkBody('name', util.format(notify.ERROR_NAME, options.name.min, options.name.max) )
             .isLength({ min: options.name.min, max: options.name.max })
 
+            req.checkBody('slug', util.format(notify.ERROR_SLUG, options.slug.min, options.slug.max) )
+            .isLength({ min: options.slug.min, max: options.slug.max });
+            
         // ORDERING
         req.checkBody('ordering', util.format(notify.ERROR_ORDERING, options.ordering.min, options.ordering.max))
             .isInt({gt: options.ordering.min, lt: options.ordering.max});

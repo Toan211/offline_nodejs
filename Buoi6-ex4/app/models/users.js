@@ -2,6 +2,7 @@ const MainModel 	= require(__path_schemas + 'users');
 const FileHelpers = require(__path_helpers + 'file');
 const uploadFolder = 'public/uploads/users/';
 const fs = require('fs');
+var md5 = require('md5');
 
 module.exports = {
     listItems: (params, options = null) => {
@@ -15,7 +16,7 @@ module.exports = {
     
         return MainModel
             .find(objWhere)
-            .select('name status ordering created modified group.name avatar')
+            .select('name status ordering created modified group.name avatar username')
             .sort(sort)
             .skip((params.pagination.currentPage-1) * params.pagination.totalItemsPerPage)
             .limit(params.pagination.totalItemsPerPage);
@@ -41,13 +42,13 @@ module.exports = {
         return MainModel.count(objWhere);
     },
 
-    changeStatus: (id, currentStatus, options = null) => {
+    changeStatus: (id, currentStatus,  user, options = null) => {
         let status			= (currentStatus === "active") ? "inactive" : "active";
         let data 			= {
             status: status,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         }
@@ -66,8 +67,8 @@ module.exports = {
         let data = {
             ordering: parseInt(orderings), 
             modified:{
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
                 }
             };
@@ -107,17 +108,18 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options = null) => {
+    saveItem: (item, user, options = null) => {
         if(options.task == "add") {
             item.created = {
-				user_id : 0,
-				user_name: "admin",
+				user_id : user.id,
+				user_name: user.username,
 				time: Date.now()
 			}
             item.group = {
                 id: item.group_id,
                 name: item.group_name,
             }
+            item.password= md5(item.password)
 			return new MainModel(item).save();
         }
 
@@ -125,6 +127,8 @@ module.exports = {
             return MainModel.updateOne({_id: item.id}, {
 				ordering: parseInt(item.ordering),
 				name: item.name,
+                username: item.username,
+                password: md5(item.password),
 				status: item.status,
 				content: item.content,
                 group: {
@@ -132,8 +136,8 @@ module.exports = {
                     name: item.group_name,
                 },
 				modified: {
-					user_id : 0,
-        			user_name: 0,
+					user_id : user.id,
+        			user_name: user.username,
         			time: Date.now()
 				}
 			});

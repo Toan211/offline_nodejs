@@ -4,8 +4,8 @@ const notify= require(__path_configs + 'notify');
 const options = {
     name: { min: 5, max: 30 },
     ordering: { min: 0, max: 100 },
-    status: { value: 'novalue' },
-    group_acp: { value: 'novalue' },
+    status: { value: 'allvalue' },
+    group_acp: { value: 'allvalue' },
 }
 
 module.exports = {

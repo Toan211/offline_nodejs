@@ -13,6 +13,7 @@ const ParamsHelpers = require(__path_helpers + 'params');
 const FileHelpers = require(__path_helpers + 'file');
 
 const controllerName = "users";
+const folderImage 		= __path_uploads + `/${controllerName}/`;
 
 const linkIndex		 = '/' + systemConfig.prefixAdmin + `/${controllerName}/`;
 const pageTitleIndex = UtilsHelpers.capitalize(controllerName) + ' Management';
@@ -54,7 +55,7 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active');
 	let id				= ParamsHelpers.getParam(req.params, 'id', '');
 
-	MainModel.changeStatus(id, currentStatus, {task: "update-one"})
+	MainModel.changeStatus(id, currentStatus, req.user, {task: "update-one"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
 });
 
@@ -62,7 +63,7 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 router.post('/change-status/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active');
 
-	MainModel.changeStatus(req.body.cid, currentStatus, {task: "update-multi"})
+	MainModel.changeStatus(req.body.cid, currentStatus, req.user, {task: "update-multi"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-multi-status', total: result.n}));
 });
 
@@ -71,7 +72,7 @@ router.post('/change-ordering', (req, res, next) => {
 	let cids 		= req.body.cid;
 	let orderings 	= req.body.ordering;
 
-	MainModel.changeOrdering(cids, orderings, null)
+	MainModel.changeOrdering(cids, orderings, req.user)
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {total: result.n , task: 'change-ordering'}));
 });
 
@@ -93,7 +94,7 @@ router.post('/delete', (req, res, next) => {
 // FORM
 router.get(('/form(/:id)?'), async(req, res, next) => {
 	let id		= ParamsHelpers.getParam(req.params, 'id', '');
-	let item	= {name: '', ordering: 0, status: 'novalue', group_id: '', group_name: '', content:''};
+	let item	= {name: '', ordering: 0, status: 'allvalue', group_id: '', group_name: '', content:'', username:'', password:''};
 
 	let groupsItems	= [];
 	await GroupsModel.listItemsInSelectbox().then((items)=> {
@@ -119,13 +120,13 @@ router.post('/save', async(req, res, next) => {
 		req.body = JSON.parse(JSON.stringify(req.body));
 
 		let item = Object.assign(req.body);
-		let taskCurrent	= (typeof item !== "undefined" && item.id !== "" ) ? "edit" : "add";
+		let taskCurrent	= (typeof item !== "undefined" && item.id !== "" ) ? 'edit' : 'add';
 
 		let errors = MainValidate.validator(req, errUpload, taskCurrent);
 		
 		if(errors.length > 0) { 
 			let pageTitle = (taskCurrent == "add") ? pageTitleAdd : pageTitleEdit;
-			if(req.file != undefined) FileHelpers.remove('public/uploads/users/', req.file.filename); // xóa tấm hình khi form không hợp lệ
+			if(req.file != undefined) FileHelpers.remove(folderImage, req.file.filename); // xóa tấm hình khi form không hợp lệ
 		
 			let groupsItems	= [];
 			await GroupsModel.listItemsInSelectbox().then((items)=> {
@@ -143,7 +144,7 @@ router.post('/save', async(req, res, next) => {
 				item.avatar = req.file.filename;
 				if(taskCurrent == "edit") FileHelpers.remove('public/uploads/users/', item.image_old);
 			}
-			MainModel.saveItem(item, {task: taskCurrent} )
+			MainModel.saveItem(item,req.user, {task: taskCurrent} )
 			.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: message}));
 		}
 	});

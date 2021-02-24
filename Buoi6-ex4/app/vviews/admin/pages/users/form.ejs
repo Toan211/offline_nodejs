@@ -6,13 +6,15 @@
 <% 
 	const controllerName = "users";
 	const linkPrefix = systemConfig.prefixAdmin + `/${controllerName}/`;
-	const folderUpload 	= 'uploads/users/';
+	const folderUpload 	= "uploads/users/";
 	let elementsForm = [
 		
 		{ for: 'name', label: 'Name', input: inputHelper('name', item.name ) },
 		{ for: 'ordering', label: 'Ordering', input: inputHelper('ordering', item.ordering ) },
-		{ for: 'avatar', label: 'Avatar', input: inputHelper('avatar', item.avatar, 'file' ) },
-		{ for: 'Show-avatar', label: 'Preview', input: imageHelper(folderUpload, item.avatar, item.name, 'img-avatar-form preview-avatar' ) },
+		{for: 'username', label: 'User name', input: inputHelper('username', item.username)},
+		{for: 'password', label: 'Password', input: inputHelper('password', item.password)},
+		{ for: 'avatar', label: 'Avatar', input: inputHelper('avatar', item.name, 'file' ) },
+		{ for: 'Show-avatar', label: 'Preview', input: imageHelper(folderUpload, item.avatar, 'no-image.jpg', item.name, 'img-avatar-form preview-avatar' ) },
 		{ for: 'status', label: 'Status', input: selectboxHelper('status', systemConfig.status_value, item.status) },
 		{ for: 'group_id', label: 'Group', input: selectboxHelper('group_id', groupsItems, item.group_id) },
 		{ for: 'content', label: 'Content', input:  textareaHelper('content', item.content ) },
@@ -38,5 +40,5 @@
 	</form>
 </div>
 <script>
-	CKEDITOR.replace( 'content_ckeditor' );
+	//CKEDITOR.replace( 'content_ckeditor' );
 </script>

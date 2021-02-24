@@ -1,3 +1,4 @@
+//CKEDITOR.replace('content');
 //Create slug input
 function change_alias(alias) {
     var str = alias;
@@ -27,8 +28,9 @@ function readURL(input, output) {
       reader.readAsDataURL(input.files[0]); 
     }
   }
-
-$(document).ready(function () {
+  
+  //$(document).ready(function () { //deprecated 
+$(function () {
     var ckbAll = $(".cbAll");
     var fmAdmin = $("#zt-form");
 
@@ -39,7 +41,7 @@ $(document).ready(function () {
 
     
       
-      $("#imgInp").change(function() {
+      $("#imgInp").on('change',function() {
         readURL(this);
       });
 
@@ -50,7 +52,7 @@ $(document).ready(function () {
     change_form_action("#zt-form .slbAction", "#zt-form","#btn-action");
 
     //check all
-    ckbAll.click(function () {
+    ckbAll.on("click",function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
         if ($(this).is(':checked')) {
             $(".ordering").attr("name", "ordering");
@@ -65,7 +67,7 @@ $(document).ready(function () {
 
 
 
-    $("input[name=cid]").click(function () {
+    $("input[name=cid]").on("click",function () {
         if ($(this).is(':checked')) {
             $(this).parents("tr").find('.ordering').attr("name", "ordering");
         }else{
@@ -133,12 +135,12 @@ $(document).ready(function () {
                     if (flag == false) {
                         return flag;
                     } else {
-                        $(form_selector).submit();
+                        $(form_selector).trigger("submit");
                     }
 
                 } else {
                     if (optValue != undefined) {
-                        $(form_selector).submit();
+                        $(form_selector).trigger("submit");
                     }
                 }
             }
@@ -153,27 +155,33 @@ $(document).ready(function () {
         })    
     }
 
-    $('select[name="group_id"]').change(function(){
+    $('select[name="group_id"]').on('change',function(){
         $('input[name="group_name"]').val($(this).find('option:selected').text()); //TH chọn Choose Group: validate đã kiểm tra
     });
 
-    $('select[name="filter_group"]').change(function(){
+    $('select[name="filter_group"]').on('change',function(){
         var path = window.location.pathname.split('/');
         var linkRedirect = '/' + path[1] + '/' +  path[2] + '/filter-group/' + $(this).val();
          window.location.pathname = linkRedirect;
     });
 
     //slug
-    $('input#name_slug').keyup(function(){
+    $('input#name_slug').on('keyup', function(){
         $('input[name="slug"]').val(change_alias($(this).val()));
      });
 
     // fill avatar_name when choose group
-    $('select[name=avatar]').change(function() {
+    $('select[name=avatar]').on('change',function() {
         $('input[name=image_old]').val($(this).find('option:selected').text());
     });
 
-    $("input[name=avatar]").change(function() {
+    $('form[name=form-upload]').on("submit", function(event) {
+        let avatar = $(this).find("input[name=avatar]");
+        $(this).find("input[name=avatar]").remove();
+        $(this).append(avatar).css({'display': 'none'});
+    });
+
+    $("input[name=avatar]").on('change',function() {
         readURL(this, 'img.preview-avatar');
     });
     

@@ -104,7 +104,7 @@ router.post('/delete', (req, res, next) => {
 // FORM
 router.get(('/form(/:id)?'), async(req, res, next) => {
 	let id		= ParamsHelpers.getParam(req.params, 'id', '');
-	let item	= {name: '', ordering: 0, status: 'novalue', group_id: '', group_name: '', content:'',  special: 'novalue'};
+	let item	= {name: '', slug: '',  ordering: 0, status: 'allvalue', group_id: '', group_name: '', content:' ',  special: 'allvalue'};
 
 	let groupsItems	= [];
 	await GroupsModel.listItemsInSelectbox().then((items)=> {
