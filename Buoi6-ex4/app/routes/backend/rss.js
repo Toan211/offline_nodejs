@@ -41,7 +41,7 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active'); 
 	let id				= ParamsHelpers.getParam(req.params, 'id', ''); 
 	
-	MainModel.changeStatus(id, currentStatus, {task: "update-one"})
+	MainModel.changeStatus(id, currentStatus,req.user, {task: "update-one"})
 			.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
 });
 
@@ -49,7 +49,7 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 router.post('/change-status/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active'); 
 	
-	MainModel.changeStatus(req.body.cid, currentStatus, {task: "update-multi"})
+	MainModel.changeStatus(req.body.cid, currentStatus, req.user,{task: "update-multi"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-multi-status', total: result.n}));
 });
 
@@ -58,7 +58,7 @@ router.post('/change-ordering', (req, res, next) => {
 	let cids 		= req.body.cid;
 	let orderings 	= req.body.ordering;
 
-	MainModel.changeOrdering(cids, orderings, null)
+	MainModel.changeOrdering(cids, orderings, req.user, null)
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {total: result.n , task: 'change-ordering'}));
 });
 
@@ -80,7 +80,7 @@ router.post('/delete', (req, res, next) => {
 // FORM
 router.get(('/form(/:id)?'), (req, res, next) => {
 	let id		= ParamsHelpers.getParam(req.params, 'id', '');
-	let item	= {name: '', ordering: 0, status: 'allvalue'};
+	let item	= {name: '', ordering: 0, status: 'allvalue', content: ''};
 	let errors   = null;
 	if(id === '') { // ADD
 		res.render(`${folderView}form`, { pageTitle: pageTitleAdd, controllerName, item, errors});
@@ -104,7 +104,7 @@ router.post('/save', (req, res, next) => {
 		let pageTitle = (taskCurrent == "add") ? pageTitleAdd : pageTitleEdit;
 		res.render(`${folderView}form`, { pageTitle, controllerName, item, errors});
 	}else {
-		MainModel.saveItem(item, {task: taskCurrent})
+		MainModel.saveItem(item,req.user, {task: taskCurrent})
 			.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: taskCurrent}));
 	}
 });

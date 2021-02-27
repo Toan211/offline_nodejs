@@ -1,6 +1,6 @@
 const MainModel 	= require(__path_schemas + 'articles');
 const FileHelpers = require(__path_helpers + 'file');
-const uploadFolder = 'public/uploads/articles/';
+const uploadFolder  = __path_uploads + 'articles/';
 const fs = require('fs');
 
 module.exports = {
@@ -63,7 +63,7 @@ module.exports = {
     },
 
     getMainArticle: (id, option = null) => {
-        let select = 'name created category.name category.id thumb summary content';
+        let select = 'name created group.name group.id avatar content';
         return Model.findById(id).select(select);
     },
 
@@ -81,17 +81,16 @@ module.exports = {
 
         if(params.currentStatus !== 'all') objWhere.status = params.currentStatus;
         if(params.keyword !== '') objWhere.name = new RegExp(params.keyword, 'i');
-
         return MainModel.count(objWhere);
     },
 
-    changeStatus: (id, currentStatus, options = null) => {
+    changeStatus: (id, currentStatus, user, options = null) => {
         let status			= (currentStatus === "active") ? "inactive" : "active";
         let data 			= {
             status: status,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         }
@@ -106,13 +105,13 @@ module.exports = {
         }
     },
 
-    changeSpecial: (id, currentSpecial, options = null) => {
+    changeSpecial: (id, currentSpecial,user, options = null) => {
         let special			= (currentSpecial === "active") ? "inactive" : "active";
         let data 			= {
             special: special,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         }
@@ -128,12 +127,12 @@ module.exports = {
     },
 
 
-    changeOrdering: async (cids, orderings, options = null) => {
+    changeOrdering: async (cids, orderings,user, options = null) => {
         let data = {
             ordering: parseInt(orderings),
             modified:{
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
                 }
             };
@@ -173,11 +172,11 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options = null) => {
+    saveItem: (item, user, options = null) => {
         if(options.task == "add") {
             item.created = {
-				user_id : 0,
-				user_name: "admin",
+				user_id: user.id,
+                user_name: user.username,
 				time: Date.now()
 			}
             item.group = {
@@ -200,9 +199,9 @@ module.exports = {
                     id: item.group_id,
                     name: item.group_name,
                 },
-				modified: {
-					user_id: item.id, 
-					user_name: item.username,
+				modified:{
+                    user_id: user.id,
+                    user_name: user.username,
 					time: Date.now()
 				}
 			});

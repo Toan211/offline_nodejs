@@ -9,13 +9,13 @@ var schema = new mongoose.Schema({
     content: String,
 
     created: {
-        user_id: Number,
+        user_id: String,
         user_name: String,
         time: Date
     },
 
     modified: {
-        user_id: Number,
+        user_id: String,
         user_name: String,
         time: Date
     }

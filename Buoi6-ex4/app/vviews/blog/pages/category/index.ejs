@@ -9,6 +9,7 @@
     <!-- Start latest-post Area -->
     <div class="latest-post-wrap">
         <%= //JSON.stringify(itemsInCategory[0].group.name)  %> 
+        <% if(itemsInCategory.length > 0) { %>
         <h4 class="cat-title"><%= itemsInCategory[0].group.name %></h4>
         <% itemsInCategory.forEach((item)=> { %>
             <div class="single-latest-post row align-items-center">
@@ -34,7 +35,9 @@
                 </div>
             </div>
         <% }) %>
-        
+        <% } else { %>
+            <tr ><td colspan="9"><h3>Không có dữ liệu</h3></td></tr>
+        <% } %>
         <!-- <div class="load-more">
             <a href="#" class="primary-btn">Load More Posts</a>
         </div> -->

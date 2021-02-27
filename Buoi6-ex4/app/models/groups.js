@@ -39,13 +39,13 @@ module.exports = {
         return MainModel.count(objWhere);
     },
 
-    changeStatus: (id, currentStatus, options = null) => {
+    changeStatus: (id, currentStatus, user, options = null) => {
         let status			= (currentStatus === "active") ? "inactive" : "active";
         let data 			= {
             status: status,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         }
@@ -60,12 +60,12 @@ module.exports = {
         }
     },
 
-    changeOrdering: async (cids, orderings, options = null) => {
+    changeOrdering: async (cids, orderings, user, options = null) => {
         let data = {
             ordering: parseInt(orderings), 
             modified:{
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
                 }
             };
@@ -91,11 +91,11 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options = null) => {
+    saveItem: (item, user, options = null) => {
         if(options.task == "add") {
             item.created = {
-				user_id : 0,
-				user_name: "admin",
+				user_id: user.id,
+                user_name: user.username,
 				time: Date.now()
 			}
 			return new MainModel(item).save();
@@ -109,21 +109,21 @@ module.exports = {
 				content: item.content,
 				group_acp: item.group_acp,
 				modified: {
-					user_id : 0,
-        			user_name: 0,
+					user_id: user.id,
+                    user_name: user.username,
         			time: Date.now()
 				}
 			});
         }
     },
 
-    changeGroupACP: (id, currentGroupACP, options = null) => {
+    changeGroupACP: (id, currentGroupACP, user, options = null) => {
         let groupAcp		= (currentGroupACP === "yes") ? "no" : "yes";
         let data 			= {
             group_acp: groupAcp,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         };

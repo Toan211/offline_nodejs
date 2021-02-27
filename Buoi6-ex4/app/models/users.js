@@ -63,7 +63,7 @@ module.exports = {
         }
     },
 
-    changeOrdering: async (cids, orderings, options = null) => {
+    changeOrdering: async (cids, orderings, user, options = null) => {
         let data = {
             ordering: parseInt(orderings), 
             modified:{

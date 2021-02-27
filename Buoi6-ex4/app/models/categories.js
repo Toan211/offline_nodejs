@@ -52,13 +52,13 @@ module.exports = {
         return MainModel.count(objWhere);
     },
 
-    changeStatus: (id, currentStatus, options = null) => {
+    changeStatus: (id, currentStatus, user, options = null) => {
         let status			= (currentStatus === "active") ? "inactive" : "active";
         let data 			= {
             status: status,
             modified: {
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
             }
         }
@@ -73,12 +73,12 @@ module.exports = {
         }
     },
 
-    changeOrdering: async (cids, orderings, options = null) => {
+    changeOrdering: async (cids, orderings,user, options = null) => {
         let data = {
             ordering: parseInt(orderings), 
             modified:{
-                user_id: 0,
-                user_name: 0,
+                user_id: user.id,
+                user_name: user.username,
                 time: Date.now()
                 }
             };
@@ -104,11 +104,11 @@ module.exports = {
         }
     },
 
-    saveItem: (item, options = null) => {
+    saveItem: (item, user, options = null) => {
         if(options.task == "add") {
             item.created = {
-				user_id : 0,
-				user_name: "admin",
+				user_id: user.id,
+                user_name: user.username,
 				time: Date.now()
             }
             
@@ -123,8 +123,8 @@ module.exports = {
 				status: item.status,
 				content: item.content,
 				modified: {
-					user_id : 0,
-        			user_name: 0,
+					user_id: user.id,
+                user_name: user.username,
         			time: Date.now()
 				}
 			});

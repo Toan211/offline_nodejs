@@ -13,7 +13,7 @@
 		<%= JSON.stringify(GoldItems[0].$.type) %> 
 		<%- //console.log(items.content); %> 
 		
-		<% items.forEach((item)=> { %>
+		<% FeedItems.forEach((item)=> { %>
             <%- //console.log(item.content); %> 
             <div class="single-latest-post row align-items-center">
                 <div class="col-lg-5 post-left">
@@ -73,6 +73,32 @@
             </tbody>
         </table>
         
-        
+       
+    </br>
+        <h4>Giá Coin</h4></br>
+        <% if(CoinItems.length > 0 || CoinItems != undefined) { %>
+            <table style="table-layout: fixed;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        
+                        <th style="width:35%;" class="text-center align-middle">Name</th>
+                        <th style="width:35%;" class="text-center align-middle">Price (USD)</th>
+                        <th class="text-center align-middle">%Change (24h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% CoinItems.forEach((CoinItem)=> { %>
+                    <tr>
+                        <td style="word-wrap:break-word "><%= CoinItem.name %></td>
+                        <td class="text-center align-middle"><%= CoinItem.quote.USD.price.toFixed(2) %>$</td>
+                        <td class="text-center align-middle"><%= CoinItem.quote.USD.percent_change_24h.toFixed(2) %>%</td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <tr ><td colspan="9"><h3>Không có dữ liệu</h3></td></tr>
+        <% } %>
     </div>
 </div>

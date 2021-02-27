@@ -55,7 +55,7 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active');
 	let id				= ParamsHelpers.getParam(req.params, 'id', '');
 
-	MainModel.changeStatus(id, currentStatus, {task: "update-one"})
+	MainModel.changeStatus(id, currentStatus,req.user, {task: "update-one"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
 });
 
@@ -64,7 +64,7 @@ router.get('/change-special/:id/:special', (req, res, next) => {
 	let currentSpecial	= ParamsHelpers.getParam(req.params, 'special', 'active');
 	let id				= ParamsHelpers.getParam(req.params, 'id', '');
 
-	MainModel.changeSpecial(id, currentSpecial, {task: "update-one"})
+	MainModel.changeSpecial(id, currentSpecial, req.user,{task: "update-one"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-special'}));
 });
 
@@ -73,7 +73,7 @@ router.get('/change-special/:id/:special', (req, res, next) => {
 router.post('/change-status/:status', (req, res, next) => {
 	let currentStatus	= ParamsHelpers.getParam(req.params, 'status', 'active');
 
-	MainModel.changeStatus(req.body.cid, currentStatus, {task: "update-multi"})
+	MainModel.changeStatus(req.body.cid, currentStatus, req.user,{task: "update-multi"})
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-multi-status', total: result.n}));
 });
 
@@ -82,7 +82,7 @@ router.post('/change-ordering', (req, res, next) => {
 	let cids 		= req.body.cid;
 	let orderings 	= req.body.ordering;
 
-	MainModel.changeOrdering(cids, orderings, null)
+	MainModel.changeOrdering(cids, orderings, req.user,null)
 		.then((result) => NotifyHelpers.show(req, res, linkIndex, {total: result.n , task: 'change-ordering'}));
 });
 
@@ -155,7 +155,7 @@ router.post('/save', async(req, res, next) => {
 				item.avatar = req.file.filename;
 				if(taskCurrent == "edit") FileHelpers.remove('public/uploads/articles/', item.image_old);
 			}
-			MainModel.saveItem(item, {task: taskCurrent} )
+			MainModel.saveItem(item, req.user, {task: taskCurrent} )
 			.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: message}));
 		}
 	});
