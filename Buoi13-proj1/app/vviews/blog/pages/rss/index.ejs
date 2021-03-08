@@ -1,0 +1,104 @@
+<% include ./../../helpers/get-image-src %>
+<% include ./../../helpers/format-date %>
+<div class="col-lg-8 post-list">
+	
+	<!-- Start single-post Area -->
+	<div class="single-post-wrap">
+	
+		
+		<div class="content-wrap">
+			<h3>RSS Page</h3>
+		</div>	
+
+		<%= //JSON.stringify(GoldItems[0].$.type) %> 
+		<%- //console.log(items.content); %> 
+		
+		<% FeedItems.forEach((item)=> { %>
+            <%- //console.log(item.content); %> 
+            <div class="single-latest-post row align-items-center">
+                <div class="col-lg-5 post-left">
+                    <div class="feature-img relative">
+                        <div class="overlay overlay-bg"></div>
+                        <img class="img-fluid" src="<%= getImageSrc(item.content) %>" alt="<%= item.title %>">
+                    </div>
+                </div>
+                <div class="col-lg-7 post-right">
+                    <a href="<%= item.link %>">
+                        <h4><%= item.title %></h4>
+                    </a>
+                    <ul class="meta">
+                        
+                        <li>
+                            <a href="#"><span class="lnr lnr-calendar-full"></span><%= item.pubDate %> </a>
+                        </li>
+                    </ul>
+                    <p class="excert"><%- item.contentSnippet %> ...</p>
+                </div>
+            </div>
+        <% }) %>
+        
+
+	</div>
+</div>
+
+
+
+
+
+<%= //JSON.stringify(itemsRandom) %> 
+<div class="col-lg-4">
+    <div class="sidebars-area">
+        <h4>Giá vàng</h4></br>
+        <table style="table-layout: fixed;" class="table table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th style="width:60%;" class="text-center align-middle">Loại vàng</th>
+                    <th class="text-center">Mua</th>
+                    <th class="text-center">Bán</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <% GoldItems.forEach((GoldItem)=> { %>
+                <tr>
+                    <td style="word-wrap:break-word "><%= GoldItem.$.type %></td>
+                    <td class="text-center align-middle"><%= GoldItem.$.buy %></td>
+                    <td class="text-center align-middle"><%= GoldItem.$.sell %></td>
+                    
+
+                    
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+       
+    </br>
+        <h4>Giá Coin</h4></br>
+        <% if(CoinItems.length > 0 || CoinItems != undefined) { %>
+            <table style="table-layout: fixed;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        
+                        <th style="width:35%;" class="text-center align-middle">Name</th>
+                        <th style="width:35%;" class="text-center align-middle">Price (USD)</th>
+                        <th class="text-center align-middle">%Change (24h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% CoinItems.forEach((CoinItem)=> { %>
+                    <tr>
+                        <td style="word-wrap:break-word "><%= CoinItem.name %></td>
+                        <td class="text-center align-middle"><%= CoinItem.quote.USD.price.toFixed(2) %>$</td>
+                        <td class="text-center align-middle"><%= CoinItem.quote.USD.percent_change_24h.toFixed(2) %>%</td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <tr ><td colspan="9"><h3>Không có dữ liệu</h3></td></tr>
+        <% } %>
+    </div>
+</div>
