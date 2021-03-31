@@ -11,7 +11,7 @@ module.exports = function(passport){
                 if (user === undefined || user.length == 0) {
                     return done(null, false, { message: notify.ERROR_LOGIN });
                 }else {
-                    if(md5(password) !== user.password) {
+                    if(/* md5 */(password) !== user.password) {
                         return done(null, false, { message: notify.ERROR_LOGIN });
                     }else {
                         return done(null, user);

@@ -18,6 +18,7 @@ const pathConfig = require('./path');
 // Define Path
 global.__base           = __dirname + '/';
 global.__path_app       = __base + pathConfig.folder_app + '/';
+
 global.__path_configs   = __path_app + pathConfig.folder_configs + '/';
 global.__path_helpers   = __path_app + pathConfig.folder_helpers + '/';
 global.__path_routers   = __path_app + pathConfig.folder_routers + '/';
@@ -25,14 +26,18 @@ global.__path_schemas   = __path_app + pathConfig.folder_schemas + '/';
 global.__path_models    = __path_app + pathConfig.folder_models + '/';
 global.__path_validates = __path_app + pathConfig.folder_validates + '/';
 global.__path_views     = __path_app + pathConfig.folder_views + '/';
+
 global.__path_views_admin = __path_views + pathConfig.folder_module_admin + '/';
 global.__path_views_blog  = __path_views + pathConfig.folder_module_blog + '/';
+global.__path_views_sales  = __path_views + pathConfig.folder_module_sales + '/';
+
 global.__path_public    = __base + pathConfig.folder_public + '/';
 global.__path_uploads     = __path_public + pathConfig.folder_uploads + '/';
 global.__path_middleware= __path_app + pathConfig.folder_middleware + '/';
 
 
 const systemConfig = require(__path_configs + 'system');
+const settingConfig = require(__path_configs + 'setting');
 const databaseConfig = require(__path_configs + 'database');
 
 // mongoose.connect(`mongodb+srv://admin:FC9sz7viteURvwgy@cluster0.wrsms.mongodb.net/training_nodejs?retryWrites=false&w=majority`);
@@ -86,11 +91,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Local variable
 app.locals.systemConfig = systemConfig;
+app.locals.settingConfig = settingConfig;
 app.locals.moment = moment;
 
 // Setup router
 app.use(`/${systemConfig.prefixAdmin}`, require(__path_routers + 'backend/index'));
 app.use(`/${systemConfig.prefixBlog}`, require(__path_routers + 'frontend/index'));
+app.use(`/${systemConfig.prefixSales}`, require(__path_routers + 'frontend-sales/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

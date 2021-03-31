@@ -3,7 +3,7 @@ const notify= require(__path_configs + 'notify');
 
 const options = {
     username: { min: 3, max: 20 },
-    password: { min: 3, max: 10 },
+    password: { min: 3, max: 50 },
     
 }
 

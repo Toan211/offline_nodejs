@@ -11,8 +11,10 @@ const UtilsHelpers 	= require(__path_helpers + 'utils');
 const NotifyHelpers = require(__path_helpers + 'notify');
 const ParamsHelpers = require(__path_helpers + 'params');
 const FileHelpers = require(__path_helpers + 'file');
+const notify  		= require(__path_configs + 'notify');
 
 const controllerName = "articles";
+const folderImage 		= __path_uploads + `/${controllerName}/`;
 
 const linkIndex		 = '/' + systemConfig.prefixAdmin + `/${controllerName}/`;
 const pageTitleIndex = UtilsHelpers.capitalize(controllerName) + ' Management';
@@ -56,8 +58,10 @@ router.get('/change-status/:id/:status', (req, res, next) => {
 	let id				= ParamsHelpers.getParam(req.params, 'id', '');
 
 	MainModel.changeStatus(id, currentStatus,req.user, {task: "update-one"})
-		.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
-});
+		.then((result) => {//NotifyHelpers.show(req, res, linkIndex, {task: 'change-status'}));
+		res.json({'currentStatus': currentStatus, 'msg': notify.CHANGE_STATUS_SUCCESS, 'id': id})
+	});
+	});
 
 // Change special
 router.get('/change-special/:id/:special', (req, res, next) => {
@@ -114,12 +118,12 @@ router.get(('/form(/:id)?'), async(req, res, next) => {
 	
 	let errors   = null;
 	if(id === '') { // ADD
-		res.render(`${folderView}form`, { pageTitle: pageTitleAdd, controllerName, item, errors, groupsItems});
+		res.render(`${folderView}form`, { pageTitle: pageTitleAdd, item, errors, groupsItems, controllerName});
 	}else { // EDIT
 		MainModel.getItem(id).then((item) =>{
 			item.group_id = item.group.id;
 			item.group_name = item.group.name;
-			res.render(`${folderView}form`, { pageTitle: pageTitleEdit, controllerName, item, errors, groupsItems});
+			res.render(`${folderView}form`, { pageTitle: pageTitleEdit, item, errors, groupsItems, controllerName});
 		});	
 	}
 	
@@ -137,7 +141,7 @@ router.post('/save', async(req, res, next) => {
 		
 		if(errors.length > 0) { 
 			let pageTitle = (taskCurrent == "add") ? pageTitleAdd : pageTitleEdit;
-			if(req.file != undefined) FileHelpers.remove('public/uploads/articles/', req.file.filename); // xóa tấm hình khi form không hợp lệ
+			if(req.file != undefined) FileHelpers.remove(folderImage, req.file.filename); // xóa tấm hình khi form không hợp lệ
 		
 			let groupsItems	= [];
 			await GroupsModel.listItemsInSelectbox().then((items)=> {
@@ -153,7 +157,7 @@ router.post('/save', async(req, res, next) => {
 				item.avatar = item.image_old;
 			}else{
 				item.avatar = req.file.filename;
-				if(taskCurrent == "edit") FileHelpers.remove('public/uploads/articles/', item.image_old);
+				if(taskCurrent == "edit") FileHelpers.remove(folderImage, item.image_old);
 			}
 			MainModel.saveItem(item, req.user, {task: taskCurrent} )
 			.then((result) => NotifyHelpers.show(req, res, linkIndex, {task: message}));

@@ -6,7 +6,7 @@ const linkNoPermission	 = StringHelpers.formatLink('/' + systemConfig.prefixBlog
 
 module.exports = (req, res, next) => {
     if(req.isAuthenticated()){
-        if(req.user.username == "admin") {
+        if(req.user.username == "admin" || req.user.username == "adminMd5") {
             next();
         }else {
             res.redirect(linkNoPermission);

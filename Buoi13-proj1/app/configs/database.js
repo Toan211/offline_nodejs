@@ -19,5 +19,8 @@ module.exports = {
     col_groups: 'groups',
     col_users: 'users',
     col_rss: 'rss',
+    col_contact: 'contact',
     col_articles: 'articles',
+    col_products: 'products',
+    col_types: 'types',
 };

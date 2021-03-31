@@ -1,4 +1,8 @@
 //CKEDITOR.replace('content');
+
+const { response, json } = require("express");
+
+CKEDITOR.replace( 'content' );
 //Create slug input
 function change_alias(alias) {
     var str = alias;
@@ -40,7 +44,7 @@ $(function () {
     }
 
     
-      
+    
       $("#imgInp").on('change',function() {
         readURL(this);
       });

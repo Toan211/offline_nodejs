@@ -1,146 +1,60 @@
-<% const folder_uploads = 'uploads/articles/'; %>
-
-<div class="col-lg-8 post-list">
-    <%= //JSON.stringify(itemsNews)  %> 
-    <!-- Start latest-post Area -->
-    <div class="latest-post-wrap">
-        <h4 class="cat-title">Latest News</h4>
-        <% itemsNews.forEach((item)=>{ %>
-            <div class="single-latest-post row align-items-center">
-                <div class="col-lg-5 post-left">
-                    <div class="feature-img relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="<%= folder_uploads + item.avatar %>" alt="<%= item.name %>">
-                    </div>
-                    <ul class="tags">
-                        <li><a href="/category/<%= item.group.id %>"><%= item.group.name %></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-7 post-right">
-                    <a href="/article/<%= item.id %>"> <h4><%= item.name %></h4></a>
-                    <ul class="meta">
-                        <li><a href="#"><span class="lnr lnr-user"></span><%= item.created.user_name %></a></li>
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span><%= //formatDate(item.created.time) %></a></li>
-                    </ul>
-                    <p class="excert"><%= item.content.substring(0,150)%> </p>
-                </div>
-            </div>
-        <%}) %>
-    </div>
-    <!-- End latest-post Area -->
-
-    <!-- Start banner-ads Area -->
-    <div class="col-lg-12 ad-widget-wrap mt-30 mb-30">
-        <img class="img-fluid" src="frontend/img/banner-ad.jpg" alt="">
-    </div>
-    <!-- End banner-ads Area -->
-    <!-- Start popular-post Area -->
+<% include ./../../helpers/format-summary %>
+<%
+    const folder_uploads = 'uploads/articles/';
     
-    <!-- <div class="popular-post-wrap">
-        <h4 class="title">Popular Posts</h4>
-        <div class="feature-post relative">
-            <div class="feature-img relative">
-                <div class="overlay overlay-bg"></div>
-                <img class="img-fluid" src="frontend/img/f1.jpg" alt="">
-            </div>
-            <div class="details">
-                <ul class="tags">
-                    <li>
-                        <a href="#">Food Habit</a>
-                    </li>
-                </ul>
-                <a href="image-post.html">
-                    <h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
-                </a>
-                <ul class="meta">
-                    <li>
-                        <a href="#">
-                            <span class="lnr lnr-user"></span>Mark wiens</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="lnr lnr-bubble"></span>06 Comments</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row mt-20 medium-gutters">
-            <div class="col-lg-6 single-popular-post">
-                <div class="feature-img-wrap relative">
-                    <div class="feature-img relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="frontend/img/f2.jpg" alt="">
-                    </div>
-                    <ul class="tags">
-                        <li>
-                            <a href="#">Travel</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="details">
-                    <a href="image-post.html">
-                        <h4>A Discount Toner Cartridge Is Better Than Ever.</h4>
-                    </a>
-                    <ul class="meta">
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-user"></span>Mark wiens</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-bubble"></span>06 </a>
-                        </li>
-                    </ul>
-                    <p class="excert">
-                        Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-6 single-popular-post">
-                <div class="feature-img-wrap relative">
-                    <div class="feature-img relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="frontend/img/f3.jpg" alt="">
-                    </div>
-                    <ul class="tags">
-                        <li>
-                            <a href="#">Travel</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="details">
-                    <a href="image-post.html">
-                        <h4>A Discount Toner Cartridge Is Better Than Ever.</h4>
-                    </a>
-                    <ul class="meta">
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-user"></span>Mark wiens</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="lnr lnr-bubble"></span>06 </a>
-                        </li>
-                    </ul>
-                    <p class="excert">
-                        Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    
-    <!-- End popular-post Area -->
+%>
+
+<div class="col-lg-8 col-md-8">
+  <div class="content_bottom_left">
+    <%= //JSON.stringify(itemArr)  %> 
+
+    <% for (let i = 0; i < itemsCategory.length; i++) { %>   
+
+      <div class="single_category wow fadeInDown">
+        <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="category/<%= itemsCategory[i].id %>"><%= itemsCategory[i].name %></a> </h2>  
+          <div id="box-cate<%= i %>" data-url="category/<%= itemsCategory[i].id %>/json">
+          
+          </div>
+      </div>
+
+      
+    <% } %> 
+  </div>
 </div>
+
+
+
+<!-- link = systemConfig  -->
+
+  <!-- <div class="col-lg-8 col-md-8">
+    <div class="content_bottom_left">
+      <%= //JSON.stringify(itemArr)  %> 
+
+      <% //itemsCategory.forEach((category)=>{ %>
+        <div class="single_category wow fadeInDown">
+          <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="/category/<%= //category.id %>"><%= //category.name %></a> </h2>
+          
+          <% //if( == category.id){ %>
+            
+          <%// } %>
+          <div id="" class="business_category_left wow fadeInDown box-large" data-url="<%-//link%>/category/<%= //category.id %>/json">
+            
+          </div>
+
+          <div class="business_category_right wow fadeInDown boxSmall">
+            <ul class="small_catg">
+              <li>
+                <div class="media wow fadeInDown"> <a class="media-left" href="pages/single.html"><img src="images/112x112.jpg" alt=""></a>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="pages/single.html">Duis condimentum nunc pretium lobortis </a></h4>
+                    <div class="comments_box"> <span class="meta_date">14/12/2045</span> <span class="meta_comment"><a href="#">No Comments</a></span> </div>
+                  </div>
+                </div>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      <%//}) %>
+    </div>
+  </div> -->

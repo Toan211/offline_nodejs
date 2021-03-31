@@ -8,7 +8,7 @@ const options = {
     content: { min: 5, max: 200 },
     group: { value: 'allvalue' },
     username: { min: 3, max: 20 },
-    password: { min: 3, max: 10 },
+    password: { min: 3, max: 50 },
 }
 
 module.exports = {

@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js">
-	<head>
-		<% include ./elements/head %>
-	</head>
-	<body>
-		<% include ./elements/header %>
-		<div class="site-main-container">
-			<!-- Start top-post Area -->
-			<% if(top_post == true){ %>
-                <% include ./elements/top_post %>
-            <% } %>
-			<!-- End top-post Area -->
-			<!-- Start latest-post Area -->
-			<section class="latest-post-area pb-120">
-				<div class="container no-padding">
-					<div class="row">
-						<%- body %>
-						<% if(silde_bar == true){ %>
-                        	<% include ./elements/sildebar %>
-						<% } %>
+<html>
+<head>
+	<% include ./elements/head %>
+</head>
+<body>
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<div class="container">
+  
+	<% include ./elements/header %>
 
-						
-						<%  if(sidebar-rss == true){ %>
-							<% include ./elements/sidebar-rss %>
-						<% } %>
-					</div>
-				</div>
-			</section>
-			<!-- End latest-post Area -->
-		</div>
-		<% include ./elements/footer %>
-		<% include ./elements/script %>
-	</body>
+	<% include ./elements/cate %>
+
+	
+  <section id="mainContent">
+    
+	<% if(top_post == true){ %>
+		<% include ./elements/top_post %>
+	<% } %>
+
+    <% //if(mid_post == true){ %>
+		<% //include ./elements/top_post %>
+	<% //} %>
+
+    <div class="content_bottom">
+      
+		<%- body %>
+		
+      <% if(silde_bar == true){ %>
+		<% include ./elements/sildebar %>
+	<% } %>
+    </div>
+  </section>
+</div>
+	<% include ./elements/footer %>
+	<% include ./elements/script %>
+</body>
 </html>

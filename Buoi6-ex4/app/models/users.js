@@ -119,7 +119,7 @@ module.exports = {
                 id: item.group_id,
                 name: item.group_name,
             }
-            item.password= md5(item.password)
+            // item.password= /* md5 */(item.password)
 			return new MainModel(item).save();
         }
 
@@ -128,7 +128,7 @@ module.exports = {
 				ordering: parseInt(item.ordering),
 				name: item.name,
                 username: item.username,
-                password: md5(item.password),
+                password: /* md5 */(item.password),
 				status: item.status,
 				content: item.content,
                 group: {

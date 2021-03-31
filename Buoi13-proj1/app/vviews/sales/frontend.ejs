@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ./elements/head %>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="position-center-center">
+    <div class="ldr"></div>
+  </div>
+</div>
+
+<!-- Wrap -->
+<div id="wrap"> 
+  
+  <!-- header -->
+	<% include ./elements/cate %>
+  
+  
+  <!--======= HOME MAIN SLIDER =========-->
+   
+    
+    <!-- SLIDE Start -->
+		<% if(top_post == true){ %>
+			<% include ./elements/top_post %>
+		<% } %>
+  
+  <!-- Content -->
+  <div id="content"> 
+    
+    <%- body %> 
+    
+    <% include ./elements/popular %>
+
+    <% include ./elements/about_us %>
+
+  </div>
+  
+  <!--======= FOOTER =========-->
+  <% include ./elements/footer %>
+  
+  <!--======= RIGHTS =========--> 
+  
+</div>
+	<% include ./elements/script %>
+</body>
+</html>

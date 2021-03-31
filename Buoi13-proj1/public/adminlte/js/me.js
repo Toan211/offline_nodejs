@@ -1,6 +1,5 @@
 //CKEDITOR.replace('content');
-
-const { response, json } = require("express");
+//CKEDITOR.replace( 'content' );
 
 //Create slug input
 function change_alias(alias) {
@@ -19,6 +18,31 @@ function change_alias(alias) {
     return str;
 }
 
+function changeStatus(link)
+{
+    $.get( link, function( data ) {
+        console.log(data);
+        var notifyClick = $("a.status-" + data.id)
+        
+        var btnNow = 'btn-warning';
+        var btnAfter = 'btn-success';
+        var statusValue = 'active';
+        if(data.currentStatus == 'active') {
+            btnNow = 'btn-success';
+            btnAfter = 'btn-warning';
+            statusValue = 'inactive';
+        }
+        //change link cho nút
+        var linkChange = notifyClick.attr("onclick").replace(data.currentStatus, statusValue);
+        notifyClick.attr("onclick", linkChange);
+        // thông báo ajax
+        notifyClick.notify(data.msg, { position:"top", className: 'success', });
+        // add vs remove class trực tiếp
+        notifyClick.addClass(btnAfter).removeClass(btnNow);
+    });
+
+}
+
 //preview upload img
 function readURL(input, output) {
     if (input.files && input.files[0]) {
@@ -32,15 +56,15 @@ function readURL(input, output) {
     }
   }
   
-  //$(document).ready(function () { //deprecated 
-$(function () {
+$(document).ready(function () { //deprecated 
+//$(function () {
     var ckbAll = $(".cbAll");
     var fmAdmin = $("#zt-form");
 
     // CKEDITOR
     if ($('textarea#content').length) {
         CKEDITOR.replace('content');
-    }
+    } // cái này vô dc
     
       $("#imgInp").on('change',function() {
         readURL(this);
@@ -53,7 +77,7 @@ $(function () {
     change_form_action("#zt-form .slbAction", "#zt-form","#btn-action");
 
     //check all
-    ckbAll.on("click",function () {
+    ckbAll.click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
         if ($(this).is(':checked')) {
             $(".ordering").attr("name", "ordering");
@@ -68,7 +92,7 @@ $(function () {
 
 
 
-    $("input[name=cid]").on("click",function () {
+    $("input[name=cid]").click(function () {
         if ($(this).is(':checked')) {
             $(this).parents("tr").find('.ordering').attr("name", "ordering");
         }else{
@@ -87,6 +111,7 @@ $(function () {
         let arrMenu = pathname.split("/");
         let currentMenu = arrMenu[2];
         $('li.nav-item a[data-active="'+currentMenu+'"]').addClass('my-active');
+        $('li.nav-item a[data-active="'+currentMenu+'"]').parent().parent().parent().addClass('menu-open');
     }
 
     //
@@ -136,12 +161,12 @@ $(function () {
                     if (flag == false) {
                         return flag;
                     } else {
-                        $(form_selector).trigger("submit");
+                        $(form_selector).submit();
                     }
 
                 } else {
                     if (optValue != undefined) {
-                        $(form_selector).trigger("submit");
+                        $(form_selector).submit();
                     }
                 }
             }
@@ -156,33 +181,33 @@ $(function () {
         })    
     }
 
-    $('select[name="group_id"]').on('change',function(){
+    $('select[name="group_id"]').change(function(){
         $('input[name="group_name"]').val($(this).find('option:selected').text()); //TH chọn Choose Group: validate đã kiểm tra
     });
 
-    $('select[name="filter_group"]').on('change',function(){
+    $('select[name="filter_group"]').change(function(){
         var path = window.location.pathname.split('/');
         var linkRedirect = '/' + path[1] + '/' +  path[2] + '/filter-group/' + $(this).val();
          window.location.pathname = linkRedirect;
     });
 
     //slug
-    $('input#name_slug').on('keyup', function(){
+    $('input#name_slug').keyup(function(){
         $('input[name="slug"]').val(change_alias($(this).val()));
      });
 
     // fill avatar_name when choose group
-    $('select[name=avatar]').on('change',function() {
+    $('select[name=avatar]').change(function() {
         $('input[name=image_old]').val($(this).find('option:selected').text());
     });
 
-    $('form[name=form-upload]').on("submit", function(event) {
+    $('form[name=form-upload]').submit( function(event) {
         let avatar = $(this).find("input[name=avatar]");
         $(this).find("input[name=avatar]").remove();
         $(this).append(avatar).css({'display': 'none'});
     });
 
-    $("input[name=avatar]").on('change',function() {
+    $("input[name=avatar]").change(function() {
         readURL(this, 'img.preview-avatar');
     });
     

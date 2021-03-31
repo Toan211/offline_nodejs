@@ -23,48 +23,80 @@ module.exports = {
 
     listItemsFrontend: (params = null, options = null) => {
         let find = {};
-        let select = 'name created.user_name created.time group.id group.name avatar';
-        let limit = 3;
+        let select = 'name created.user_name created.time group.id group.name avatar content';
+        let limit;
         let sort = '';
 
         if (options.task == 'items-special'){
             find = {special: 'active'};
             sort = {ordering: 'asc'};
+            limit = 4;
         }
 
         if (options.task == 'items-news'){
-            select = 'name created.user_name created.time group.name group.id  avatar content';
+            select = ' name created.user_name created.time group.name group.id  avatar content';
             find = {status:'active'};
             sort = {'created.time': 'desc'};
+            limit = 8;
+        }
+
+        if (options.task == 'items-news-category'){
+            limit = 5;
+            select = ' name created.user_name created.time group.name group.id  avatar content';
+            find = {status:'active','group.id': params.id};
+            sort = {'created.time': 'desc'};   
         }
 
         if (options.task == 'items-in-category'){
-            select = 'name created.user_name created.time group.name avatar content';
+            select = 'name created.user_name created.time group.name avatar content slug';
             find = {status:'active', 'group.id': params.id};
             sort = {'created.time': 'desc'};
+            
         }
 
 
         if (options.task == 'items-random'){
             return MainModel.aggregate([
                     { $match: { status: 'active' }},
-                    { $project : {name : 1 , created : 1 ,avatar: 1}  },
-                    { $sample: {size: 3}}
+                    { $project : {name : 1 , created : 1 ,avatar: 1, content: 1}  },
+                    { $sample: {size: 4}}
                 ]);
         }
+
+        if (options.task == 'items-article-in-category'){
+            find = {status:'active'};
+            select = 'name created.user_name created.time group.name group.id avatar content';
+            sort = {'created.time': 'desc'};
+            limit= 4; 
+        }
+
         if (options.task == 'items-others'){
             select = 'name created.user_name created.time group.id group.name avatar content';
             find = {status:'active', '_id': {$ne: params._id}, 'group.id': params.group.id};
             sort = {'created.time': 'desc'};
+            limit = 3;
         }
 
         return MainModel.find(find).select(select).limit(limit).sort(sort);
 
     },
 
+    listItemsSearch: (params, options = null) =>{
+        let objWhere    = {status:'active'};
+        let sort		= {};
+        if(params.keyword !== '') objWhere.name = new RegExp(params.keyword, 'i');
+        
+
+        return MainModel
+            .find(objWhere)
+            .select('name avatar status specisal ordering created modified group.name content')
+            .sort(sort)
+            .limit(9);
+    },
+
     getMainArticle: (id, option = null) => {
         let select = 'name created group.name group.id avatar content';
-        return Model.findById(id).select(select);
+        return MainModel.findById(id).select(select);
     },
 
     getItem: (id, options = null) => {

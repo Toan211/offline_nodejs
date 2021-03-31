@@ -2,117 +2,32 @@
     const folder_uploads = 'uploads/articles/';
     
 %>
-<%= //JSON.stringify(itemsSpecial) %> 
 
-<section class="top-post-area pt-10">
-    <div class="container no-padding">
-        <div class="row small-gutters">
-            <div class="col-lg-8 top-post-left">
-            <div class="feature-image-thumb relative mt-10">
-                <div class="overlay overlay-bg"></div>
-                <img class="img-fluid" src="<%= folder_uploads + itemsSpecial[0].avatar %>" alt="<%= itemsSpecial[0].group.name %>">
-            </div>
-            <div class="top-post-details">
-                <ul class="tags">
-                    <li><a href="/category/<%= itemsSpecial[0].group.id %>"><%= itemsSpecial[0].group.name %></a></li>
-                </ul>
-                <a href="/article/<%= itemsSpecial[0].id %>">
-                    <h3><%= itemsSpecial[0].name %></h3>
-                </a>
-                <ul class="meta">
-                    <li><a href="#"><span class="lnr lnr-user"></span><%= itemsSpecial[0].created.user_name %></a></li>
-                    <li><a href="#"><span class="lnr lnr-calendar-full"></span><%= moment(itemsSpecial[0].created.time).format(systemConfig.format_date) %></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col-lg-4 top-post-right">
-            <% for(let i = 1; i < itemsSpecial.length; i++){ %>
-                <div class="single-top-post mt-10">
-                    <div class="feature-image-thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="<%= folder_uploads + itemsSpecial[i].avatar %>" alt="<%= itemsSpecial[i].name %>">
-                    </div>
-                    <div class="top-post-details">
-                        <ul class="tags">
-                            <li><a href="/category/<%= itemsSpecial[i].group.id %>"><%= itemsSpecial[i].group.name %></a></li>
-                        </ul>
-                        <a href="/article/<%= itemsSpecial[i].id %>">
-                            <h4><%= itemsSpecial[i].name %></h4>
-                        </a>
-                        <ul class="meta">
-                            <li><a href="#"><span class="lnr lnr-user"></span><%= itemsSpecial[i].created.user_name %></a></li>
-                            <li><a href="#"><span class="lnr lnr-calendar-full"></span><%= moment(itemsSpecial[i].created.time).format(systemConfig.format_date) %></a></li>
-                        </ul>
-                    </div>
-                </div>
+<div class="content_top">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm6">
+        <div class="latest_slider">
+          <div class="slick_slider">
+            <% for(let i = 0; i < 4; i++){ %>
+              
+              <div class="single_iteam"><img src="<%= folder_uploads + itemsNews[i].avatar %>" alt="<%= itemsNews[i].name %>">
+                <h2><a class="slider_tittle" style="display: block;" href="/article/<%= itemsNews[i].id %>"><%= itemsNews[i].name %></a></h2>
+                <h2 style="right: unset; top: 0%; text-align: inherit;"><a class="slider_tittle" style="color: azure;background-color: grey;" href="/category/<%= itemsNews[i].group.id %>"><%= itemsNews[i].group.name %></a></h2>
+              </div>
             <% } %>
+          </div>
         </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm6">
+        <div class="content_top_right">
+          <ul class="featured_nav wow fadeInDown">
+            <% for(let i = 4; i < itemsNews.length; i++){ %>
+            <li><img src="<%= folder_uploads + itemsNews[i].avatar %>" alt="<%= itemsNews[i].name %>">
+              <div class="title_caption"><a href="/article/<%= itemsNews[i].id %>"><%= itemsNews[i].name %></a></div>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
     </div>
-</section>
-
-
-
-
-<!-- <div class="col-lg-4 top-post-right">
-                <div class="single-top-post">
-                    <div class="feature-image-thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="frontend/img/top-post2.jpg" alt="">
-                    </div>
-                    <div class="top-post-details">
-                        <ul class="tags">
-                            <li>
-                                <a href="#">Food Habit</a>
-                            </li>
-                        </ul>
-                        <a href="image-post.html">
-                            <h4>A Discount Toner Cartridge Is Better Than Ever.</h4>
-                        </a>
-                        <ul class="meta">
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-user"></span>Mark wiens</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-bubble"></span>06 Comments</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="single-top-post mt-10">
-                    <div class="feature-image-thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="frontend/img/top-post3.jpg" alt="">
-                    </div>
-                    <div class="top-post-details">
-                        <ul class="tags">
-                            <li>
-                                <a href="#">Food Habit</a>
-                            </li>
-                        </ul>
-                        <a href="image-post.html">
-                            <h4>A Discount Toner Cartridge Is Better</h4>
-                        </a>
-                        <ul class="meta">
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-user"></span>Mark wiens</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="lnr lnr-bubble"></span>06 Comments</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
+  </div>

@@ -1,12 +1,7 @@
-Node 2 - Chương 2 - Bài 2. Xây dựng chức năng quyền truy cập của nhóm người dùng
-
-Video 1: Group CRUD - C2B1V1 - Group CRUD 
-- 
-
 
 error 16: articles--special change status
 
-b17:
+
 Vào 1 cate sẽ hiển thị các bài viết trong 
 cate đó ra
 - Lấy danh sách cate trong CSDL
@@ -75,3 +70,62 @@ layout:
     + lấy itemsArticle đổ ra view
 - categories/indexLayout1.ejs 	đổ dữ liệu 
 - categories/indexLayout2.ejs 	đổ dữ liệu 
+----------------
+
+fix frontend
+search *
+--đổ các article của từng category cụ thể trong trang home
+--add thêm vài cái article
+about me
+contact nếu đủ tg
+sửa rss
+--cắt frontend của sales
+
+
+vietj hóa -done 30/3
+gắn search trong tiêu đề -done 27/3
+bài viết liên quan xóa descrips -done 30/3
+tìm tấm hình quảng cáo bỏ vô phần bên phải dưới -done 30/3
+bclick vào tin tức tổng hợp--> mở tab mới -done 30/3
+trang login -done 29/3
+làm trang liên hệ -done 28/3
+ajax -done 29/3
+fix logo ?
+menu active -done 30/3
+thống kê dasboard' -done 30/3
+
+
+sửa about us
+
+chi tiết url
+phân trang trong tin tức tổng hợp
+total item nếu dc
+fix lại tin tưc tổng hợp
+pav shop
+in đậm search --done 30/3
+không có bài viết nào
+fix lại layout blog category--sửa hình bị móp trong cate
+slider -- hiển thị status-link--hình quảng cáo sp != hình sản phầm
+lọc theo status
+subcribe-- name email status time -- quản lý subcribe
+
+A 
+    size{
+        A: 1  
+            {
+                color{
+                    red : 1
+                        {
+                            price:
+                        }
+                    blue: 0
+                    yellow: 0
+
+                }
+
+            }
+        B: 0
+        C: 0
+        D: 1
+        original price
+    } 
